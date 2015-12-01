@@ -12,13 +12,19 @@ let strip (ans:string) : string =
     String.trim (List.fold_left clean "" (List.map remove_non_alpha exp_lower))
 
 let one_word_ans q a =
-	let helper question ans =
+	let rec helper question ans =
 		match ans with
 		| [] -> false
 		| hd::tl -> 
 			(if hd = (List.hd question.answer) then
 	    	true
 	    else
-		    one_word_ans question tl) in
+		    helper question tl) in
 	helper q (Str.split (Str.regexp " ") a)
+
+(* long_ans ensures that all words in the correct answer are in the player's answer
+ * i.e., the correct answer is a subset of the player's answer *)
+let long_ans q a =
+	let ans = Str.split (Str.regexp " ") a in
+	List.fold_left (fun acc x -> acc && (List.mem x ans)) true (q.answer)
 
