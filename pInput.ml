@@ -2,6 +2,15 @@ let get_input () =
 	Printf.printf "Answer: ";
 	read_line()
 
+let timed_question (time:float) : string =
+  let start_time = Unix.gettimeofday () in 
+  let input = get_input () in
+  let end_time = Unix.gettimeofday () in
+  if (end_time-.start_time) > time then
+    ""
+  else input
+
+
 let remove_non_alpha = Str.global_replace (Str.regexp "[^a-z ]+") ""
 
 let explode = Str.split (Str.regexp " ") 
