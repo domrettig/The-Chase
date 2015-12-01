@@ -1,0 +1,32 @@
+{
+  "questions":
+  [
+    {
+      "id": "Easy",
+      "description": "Trivia for kids",
+      "set": ["What food makes up nearly all (around 99%) of a Giant Panda’s diet?","True or false? Mice live for up to 10 years.",
+      "What is the name of the phobia that involves an abnormal fear of spiders?","What is the largest type of ‘big cat’ in the world?",
+      "True or false? Crocodiles have no sweat glands so they use their mouths to release heat.",
+      "Are butterflies insects?","What are female elephants called?","True or false? Bats are mammals.",
+      "Bees are found on every continent of earth except for one, which is it?",
+      "True or false? Cats spend an average of 13 to 14 hours a day sleeping.",
+      "What is the fastest land animal in the world?","A ‘doe’ is what kind of animal?",
+      "True or false? Cougar’s are herbivores.","Groups of lions are known as what?",
+      "Is a dolphin a mammal?","What is the largest land animal in the world?",
+      "True of false? Snakes have slimy skin.",
+      "What is the only continent on earth where Giraffes live in the wild?",
+      "How many pairs of wings does a bee have?","What type of animal is the largest primate in the world?",
+      "Is a shark a fish or a mammal?",
+      "True or false? Owls are far-sighted, meaning that anything within a few inches of their eyes can’t be seen properly.",
+      "What is the name of an adult female horse?","What are baby goats called?",
+      "What is the tallest animal in the world?","True or false? Rabbits are born blind.",
+      "What is the most recognizable physical feature of the male lion?",
+      "How many legs does a spider have?"," The crocodile species is believed to have been around for how long? 2 million years or 200 million years?"],
+      "points": [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],
+      "answers": ["Bamboo","False", "Arachnophobia", "tiger","True","Yes","Cows",
+      "True","Antarctica", "True","cheetah", "A female deer", "False","Prides",
+      "Yes","The elephant","False","Africa","2","The Gorilla","A fish","True","A mare",
+      "Kids","The giraffe","True","Its mane","8","200 million years"]
+    }
+  ]
+}
