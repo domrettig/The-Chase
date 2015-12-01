@@ -3,7 +3,7 @@ open Gameplay
 (* For a timed question, timed_question receives an empty Ivar from Gameplay
  * After x seconds, Ivar will be filled, and the player will not be allowed
  * to enter an answer. *)
-val timed_question : 'a Deferred.t -> string
+val timed_question : float -> string
 
 (* Returns player input for answer to a trivia question *)
 val get_input : unit -> string
