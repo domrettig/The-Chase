@@ -56,7 +56,7 @@ let update_wallet n =
 	test_metadata.player.wallet <- new_val
 
 let serve_question () =
-  let q = Reader.rand_question () in
+  let q = Reader.rand_question test_metadata.difficulty in
   test_metadata.curr_question <- Some q;
   display_question q;
   let ans = PInput.get_input () in 
