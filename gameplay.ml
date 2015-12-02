@@ -1,5 +1,6 @@
 include Reader
 include PInput
+include Ai
 
 type player = {
 	mutable wallet: int;
@@ -68,7 +69,7 @@ let serve_question () =
   Printf.printf "Your Wallet: %d\n" test_metadata.player.wallet
 
 let phase_one () =
-	Printf.printf "Welcome to The Chase!\nFor this phase, answer as many questions as you can in 90 seconds. Press enter when you're ready.\n";
+	Printf.printf "Welcome to The Chase!\nFor this phase, answer as many questions as you can in 90 seconds. Press enter when you're ready.";
 	let _ = read_line () in
 	let start_time = Unix.gettimeofday () in
 	let rec body () = 
