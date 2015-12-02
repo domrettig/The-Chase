@@ -1,1 +1,16 @@
-#use "utop_utility.ml";;
+#use "topfind";;
+#require "pa_ounit";;
+#require "qcheck";;
+#load "assertions.cma";;
+
+#require "yojson";;
+#require "str";;
+
+#directory "_build";;
+#load "reader.d.cmo";;
+#load "gameplay.d.cmo";;
+#load "pInput.d.cmo";;
+
+open Reader
+open Gameplay
+open PInput

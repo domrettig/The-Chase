@@ -1,4 +1,3 @@
-open Gameplay
 
 (* For a timed question, timed_question receives an empty Ivar from Gameplay
  * After x seconds, Ivar will be filled, and the player will not be allowed

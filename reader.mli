@@ -3,7 +3,11 @@
 open Yojson.Basic.Util
 
 (*A type representing a single question*)
-type question
+type question = {
+	question: bytes;
+	answer: bytes list;
+	point: int;
+}
 
 (*Represents the entire library of questions at a given difficulty level*)
 type question_db

@@ -36,7 +36,7 @@ let get_points json =
 type question = {
   question: bytes;
   answer: bytes list;
-  point: int
+  point: int;
   }
 
 (*Represents the entire library of questions at a given difficulty level*)
@@ -45,7 +45,7 @@ type question_db = {
   description: bytes;
   questions: bytes list;
   answers: bytes list;
-  points: int list
+  points: int list;
 }
 
 (* Represents the data base of all difficulty levels *)
@@ -54,7 +54,7 @@ type whole_db = {
   all_description: bytes list;
   all_questions: bytes list list;
   all_answers: bytes list list;
-  all_points: int list list
+  all_points: int list list;
 }
 
 let complete_db = {all_id=get_id_desc "id" json;

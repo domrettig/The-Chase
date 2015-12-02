@@ -1,3 +1,5 @@
+include Reader
+
 let get_input () = 
 	Printf.printf "Answer: ";
 	read_line()

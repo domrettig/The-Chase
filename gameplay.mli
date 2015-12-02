@@ -1,4 +1,4 @@
-open Async.Std
+(* open Async.Std *)
 
 (*Holds all game metadata, including player and ai and current question, question pool*)
 type metadata
@@ -13,7 +13,7 @@ type ai
 type gameboard
 
 (*Defines the types of actor in the game, the ai and the player*)
-type 'a actor
+type actor
 
 (*Returns the current question served to the player*)
 val get_served_question : unit -> Reader.question
@@ -25,7 +25,7 @@ val is_one_word_ans : Reader.question -> bool
 val is_mult_word_ans : Reader.question -> bool
 
 (*Returns a deffered that will be determined when time runs out*)
-val get_timer : float -> 'a Deferred.t
+(* val get_timer : float -> 'a Deferred.t *)
 
 (*Produces a response string, (a,b) 
  * [a] is the correctness of the answer
@@ -43,7 +43,7 @@ val phase_one : int -> unit
 val update_bank : float -> unit
 
 (*Moves the actor one position forward on the game board*)
-val update_position: 'a actor -> unit
+val update_position: actor -> unit
 
 (*Determines whether the player has been caught by the chaser*)
 val caught : gameboard -> bool
