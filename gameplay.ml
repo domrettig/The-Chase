@@ -23,8 +23,9 @@ type actor = P of player | A of ai
 type metadata = {
 	mutable player: player;
 	mutable ai: ai;
-	difficulty: int;
+	mutable difficulty: int;
 	mutable curr_question: Reader.question option;
+	mutable curr_cat: int;
 	mutable gameboard: gameboard;
 }
 
@@ -49,6 +50,7 @@ let test_metadata = {
 	ai = ai;
 	difficulty = 2;
 	curr_question = None;
+	curr_cat = 0;
 	gameboard = gameboard;
 }
 
@@ -80,9 +82,27 @@ let serve_question () =
   else ());
   Printf.printf "Your Wallet: %f\n" test_metadata.player.wallet
 
+let rec get_difficulty () =
+	Printf.printf "Do you want to play on easy, medium, or hard? ";
+	let diff = read_line () in
+	match (String.lowercase diff) with
+	| "easy" 		-> test_metadata.difficulty <- 0
+	| "medium" 	-> test_metadata.difficulty <- 1
+	| "hard" 		-> test_metadata.difficulty <- 2
+	| _ 				-> Printf.printf "Not a difficulty.\n"; get_difficulty ()
+
+let rec get_category () =
+	Printf.printf "What category of questions do you want to answer?\n";
+	let cat = read_line ()
+	match (String.lowercase cat) with
+	| "science" -> test_metadata.curr_cat <- 0
+	| "history" -> test_metadata.curr_cat <- 1
+	| "math" 		-> test_metadata.curr_cat <- 2
+	| _ 				-> Printf.printf "Not a valid category.\n"; get_category ()
+
 let phase_one () =
-	Printf.printf "Welcome to The Chase!\nFor this phase, answer as many questions as you can in 90 seconds. Press enter when you're ready.";
-	let _ = read_line () in
+	Printf.printf "Welcome to The Chase!\nFor this phase, answer as many questions as you can in 90 seconds.\n";
+	get_difficulty ();
 	let start_time = Unix.gettimeofday () in
 	let rec body () = 
 		let curr_time = Unix.gettimeofday () in
