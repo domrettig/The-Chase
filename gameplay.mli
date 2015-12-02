@@ -12,9 +12,6 @@ type ai
 (*Holds data about round 2 gameboard*)
 type gameboard
 
-(*Defines the types of actor in the game, the ai and the player*)
-type actor
-
 (*Returns the current question served to the player*)
 val serve_question : unit -> unit
 
@@ -36,8 +33,8 @@ val phase_one : unit -> unit
 (*Updates the amount of money in the bank*)
 val update_bank : float -> unit
 
-(*Moves the actor one position forward on the game board*)
-val update_position: actor -> unit
+(*Moves the player and AI one position forward if they got the answer right*)
+val update_gameboard: bool -> bool -> unit
 
 (*Determines whether the player has been caught by the chaser*)
 val caught : gameboard -> bool

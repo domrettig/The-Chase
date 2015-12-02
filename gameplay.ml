@@ -47,7 +47,7 @@ let gameboard = {
 let test_metadata = {
 	player=player;
 	ai = ai;
-	difficulty = 0;
+	difficulty = 2;
 	curr_question = None;
 	gameboard = gameboard;
 }
@@ -97,8 +97,13 @@ let phase_one () =
 let update_bank n =
 	failwith "Unimplemented"
 
-let update_position a =
-	failwith "Unimplemented"
+let update_gameboard player_right ai_right =
+	match player_right, ai_right with
+	| true, true   -> test_metadata.gameboard.player_pos <- test_metadata.gameboard.player_pos + 1;
+					  				test_metadata.gameboard.chaser_pos <- test_metadata.gameboard.chaser_pos + 1
+	| true, false  -> test_metadata.gameboard.player_pos <- test_metadata.gameboard.player_pos + 1
+	| false, true  -> test_metadata.gameboard.chaser_pos <- test_metadata.gameboard.chaser_pos + 1
+	| false, false -> ()
 
 let caught g = 
 	failwith "Unimplemented"
@@ -128,12 +133,51 @@ let rec init_gameboard () =
     test_metadata.player.wallet <- 0.
   |  _  -> Printf.printf "That is not a valid selection."; init_gameboard ()
 
+let rec head_to_head_question () =
+	(* Get question, display, and update metadata *)
+	let q = Reader.rand_question test_metadata.difficulty in
+	test_metadata.curr_question <- Some q;
+	display_question q;
+
+	(* Get the player's and ai's answers *)
+	let ans = PInput.timed_question 10. in
+	let ai_correct = Ai.ai_is_correct test_metadata.difficulty q in
+	let ai_ans = Ai.ai_answer ai_correct q in
+	Printf.printf "The AI answered %s\n" ai_ans;
+	Printf.printf "The correct answer is %s\n" q.answer;
+
+	let (p_correct,p_timeout) = PInput.is_correct ans q in
+	respond_to_answer (p_correct,p_timeout);
+	update_gameboard p_correct ai_correct;
+	finished ()
+
+and finished () =
+	(* If the player is at the bank *)
+	if test_metadata.gameboard.player_pos = test_metadata.gameboard.size then begin
+		Printf.printf "YOU WIN!\n";
+		test_metadata.player.bank <- test_metadata.player.wager
+	end
+	(* If the Chaser caught the player *)
+	else if test_metadata.gameboard.player_pos = test_metadata.gameboard.chaser_pos then begin
+		Printf.printf "Sorry, the chaser caught you\n";
+		test_metadata.player.wager <- 0.
+	end
+	else
+		head_to_head_question ()
+
 let phase_two () = 
-	failwith "Unimplemented"
+	init_gameboard ();
+	Printf.printf "These are timed questions. You have 10 seconds to answer.\n";
+	head_to_head_question ()
+	if test_metadata.player.wallet = 0. then
+		Printf.printf "You're out of money! Game over\n"
+	else
+		Printf.printf "On to Phase Three!\n"
 
 let phase_three () =
 	failwith "Unimplemented"
 
 let game_loop () =
-	failwith "Unimplemented"
+	phase_one ();
+	phase_two ();
 
