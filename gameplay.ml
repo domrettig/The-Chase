@@ -1,4 +1,5 @@
 include Reader
+include PInput
 
 type player = {
 	mutable wallet: int;
@@ -38,18 +39,25 @@ let test_metadata = {
 	curr_question = None;
 }
 
-let get_served_question () : Reader.question =
-	let q = Reader.rand_question () in
-	test_metadata.curr_question <- Some q;
-	q
-
-let display_question (q:Reader.question option) : unit = 
-	match q with
-	| None -> failwith "No question in metadata"
-	| Some x -> Printf.printf "Question: %s\n" x.question
+let display_question (q:Reader.question) : unit = 
+	Printf.printf "Question: %s\n" q.question
 
 let respond_to_answer p =
-	failwith "Unimplemented"
+  match p with
+  | (correct, timeout) -> 
+    if timeout then
+      Printf.printf "You timed out!\n"
+    else if correct then
+           Printf.printf "That is correct!\n"
+         else Printf.printf "That is incorrect!\n"
+
+let serve_question () =
+  let q = Reader.rand_question () in
+  test_metadata.curr_question <- Some q;
+  display_question q;
+  let ans = PInput.get_input () in 
+  let (correct, timeout) = PInput.is_correct ans q in
+  respond_to_answer (correct, timeout)
 
 let update_wallet n = 
 	player.wallet <- n

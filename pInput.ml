@@ -1,5 +1,9 @@
 include Reader
 
+let remove_non_alpha = Str.global_replace (Str.regexp "[^a-z ]+") ""
+
+let explode = Str.split (Str.regexp " ") 
+
 let strip (ans:string) : string =
   let exp_lower = explode (String.trim (String.lowercase ans)) in
   let clean a x = if x<>"" then a ^ (x ^ " ") else a in
@@ -20,11 +24,6 @@ let timed_question (time:float) : string =
     ""
   end
   else input
-
-
-let remove_non_alpha = Str.global_replace (Str.regexp "[^a-z ]+") ""
-
-let explode = Str.split (Str.regexp " ") 
 
 let one_word_ans q a =
 	let rec helper question ans =

@@ -16,7 +16,7 @@ type gameboard
 type actor
 
 (*Returns the current question served to the player*)
-val get_served_question : unit -> Reader.question
+val serve_question : unit -> unit
 
 (*Returns a deffered that will be determined when time runs out*)
 (* val get_timer : float -> 'a Deferred.t *)
@@ -25,7 +25,7 @@ val get_served_question : unit -> Reader.question
  * [a] is the correctness of the answer
  * [b] is true if timeout
  *)
-val respond_to_answer : bool * bool -> string
+val respond_to_answer : bool * bool -> unit
 
 (*Updates the amount of money in the players wallet*)
 val update_wallet : float -> unit
