@@ -9,6 +9,10 @@ type ai = {
 	difficulty:int;
 }
 
+type gameboard = {
+	pos:int;
+}
+
 type actor = P of player | A of ai
 
 type metadata = {
@@ -35,4 +39,37 @@ let display_question (q:Reader.question option) : unit =
 	match q with
 	| None -> failwith "No question in metadata"
 	| Some x -> Printf.printf "Question: %s\n" x.question
+
+let is_one_word_ans q =
+	failwith "Unimplemented"
+
+let is_mult_word_ans q =
+	failwith "Unimplemented"
+
+let respond_to_answer p =
+	failwith "Unimplemented"
+
+let update_wallet n = 
+	failwith "Unimplemented"
+
+let phase_one i =
+	failwith "Unimplemented"
+
+let update_bank n =
+	failwith "Unimplemented"
+
+let update_position a =
+	failwith "Unimplemented"
+
+let caught g = 
+	failwith "Unimplemented"
+
+let phase_two () = 
+	failwith "Unimplemented"
+
+let phase_three () =
+	failwith "Unimplemented"
+
+let game_loop () =
+	failwith "Unimplemented"
 
