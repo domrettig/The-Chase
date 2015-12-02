@@ -8,8 +8,9 @@
 
 #directory "_build";;
 #load "reader.d.cmo";;
-#load "gameplay.d.cmo";;
 #load "pInput.d.cmo";;
+#load "gameplay.d.cmo";;
+
 
 open Reader
 open Gameplay

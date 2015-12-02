@@ -16,13 +16,7 @@ type gameboard
 type actor
 
 (*Returns the current question served to the player*)
-val get_served_question : unit -> Reader.question
-
-(*Returns a bool if the passed in question has a single word as an answer*)
-val is_one_word_ans : Reader.question -> bool
-
-(*Returns a bool if the passed in question has multiple words as an answer*)
-val is_mult_word_ans : Reader.question -> bool
+val serve_question : unit -> unit
 
 (*Returns a deffered that will be determined when time runs out*)
 (* val get_timer : float -> 'a Deferred.t *)
@@ -31,13 +25,13 @@ val is_mult_word_ans : Reader.question -> bool
  * [a] is the correctness of the answer
  * [b] is true if timeout
  *)
-val respond_to_answer : bool * bool -> string
+val respond_to_answer : bool * bool -> unit
 
 (*Updates the amount of money in the players wallet*)
-val update_wallet : float -> unit
+val update_wallet : int -> unit
 
 (*Handles running phase one of the game, the one minute round/two minute round*)
-val phase_one : int -> unit
+val phase_one : unit -> unit
 
 (*Updates the amount of money in the bank*)
 val update_bank : float -> unit
