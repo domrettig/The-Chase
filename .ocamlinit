@@ -9,10 +9,10 @@
 #directory "_build";;
 #load "reader.d.cmo";;
 #load "pInput.d.cmo";;
-#load "gameplay.d.cmo";;
 #load "ai.d.cmo";;
+#load "gameplay.d.cmo";;
 
 open Reader
+open Ai
 open Gameplay
 open PInput
-open Ai
