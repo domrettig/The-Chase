@@ -24,8 +24,8 @@ type metadata = {
 	mutable player: player;
 	mutable ai: ai;
 	mutable difficulty: int;
-	mutable curr_question: Reader.question option;
 	mutable curr_cat: int;
+	mutable used_cat: int list;
 	mutable gameboard: gameboard;
 }
 
@@ -49,8 +49,8 @@ let test_metadata = {
 	player=player;
 	ai = ai;
 	difficulty = 2;
-	curr_question = None;
 	curr_cat = 0;
+	used_cat = [];
 	gameboard = gameboard;
 }
 
@@ -72,7 +72,6 @@ let update_wallet n =
 
 let serve_question () =
   let q = Reader.rand_question test_metadata.difficulty test_metadata.curr_cat in
-  test_metadata.curr_question <- Some q;
   display_question q;
   let ans = PInput.get_input () in 
   let (correct, timeout) = PInput.is_correct ans q in
@@ -95,9 +94,27 @@ let rec get_category () =
 	Printf.printf "What category of questions do you want to answer?\n";
 	let cat = read_line () in
 	match (String.lowercase cat) with
-	| "science" -> test_metadata.curr_cat <- 0
-	| "history" -> test_metadata.curr_cat <- 1
-	| "math" 		-> test_metadata.curr_cat <- 2
+	| "science" -> 
+	  if List.mem 0 test_metadata.used_cat then begin
+	    Printf.printf "You have already used the category Science.\n"; get_category ()
+	  end
+	  else 
+	    test_metadata.used_cat <- (test_metadata.used_cat @ [0]);
+	    test_metadata.curr_cat <- 0
+	| "history" ->
+	  if List.mem 1 test_metadata.used_cat then begin
+	    Printf.printf "You have already used the category History.\n"; get_category ()
+	  end
+	  else 
+	    test_metadata.used_cat <- (test_metadata.used_cat @ [1]);
+	    test_metadata.curr_cat <- 1
+	| "math" 		-> 
+	  if List.mem 2 test_metadata.used_cat then begin 
+	    Printf.printf "You have already used the category Math.\n"; get_category ()
+	  end
+	  else 
+	    test_metadata.used_cat <- (test_metadata.used_cat @ [2]);
+	    test_metadata.curr_cat <- 2
 	| _ 				-> Printf.printf "Not a valid category.\n"; get_category ()
 
 let phase_one () =
@@ -155,7 +172,6 @@ let rec init_gameboard () =
 let rec head_to_head_question () =
 	(* Get question, display, and update metadata *)
 	let q = Reader.rand_question test_metadata.difficulty test_metadata.curr_cat in
-	test_metadata.curr_question <- Some q;
 	display_question q;
 
 	(* Get the player's and ai's answers *)
