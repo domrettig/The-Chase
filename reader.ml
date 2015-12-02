@@ -60,21 +60,25 @@ points=ref (get_points json)}
  * removes from the db
 val rand_question: unit -> question *)
 let rand_question difficulty =
+  Random.init(int_of_float(Unix.gettimeofday ()));
   let rand = Random.int (List.length !(List.nth !(complete_db.questions) difficulty)) in
   let q = List.nth !(List.nth !(complete_db.questions) difficulty) rand in
   let a = List.nth !(List.nth !(complete_db.answers) difficulty) rand in
   let p = List.nth !(List.nth !(complete_db.points) difficulty) rand in
   (* Removes question from db, along with points and answers *)
-  List.nth !(complete_db.questions) difficulty :=
-   List.filter (fun x -> if x = q then false else true)
-   !(List.nth !(complete_db.questions) difficulty);
-  List.nth !(complete_db.answers) difficulty :=
-   List.filter (fun x -> if x = a then false else true)
-   !(List.nth !(complete_db.answers) difficulty);
-  List.nth !(complete_db.points) difficulty :=
-   List.filter (fun x -> if x = p then false else true)
-   !(List.nth !(complete_db.points) difficulty);
 
+(* WHAT IF MULTIPLE TRUE FALSE< THEN ANSWER REMOVES ALL OCCURENCES OF FALSE OR TRUE ETC *)
+ (*  Printf.printf "%i" (List.length !(List.nth !(complete_db.questions) difficulty)); *)
+  List.nth !(complete_db.questions) difficulty :=
+   List.filter (fun x -> x <> q)
+   (!(List.nth !(complete_db.questions) difficulty));
+  List.nth !(complete_db.answers) difficulty :=
+   List.filter (fun x -> x <> a)
+   (!(List.nth !(complete_db.answers) difficulty));
+  List.nth !(complete_db.points) difficulty :=
+   List.filter (fun x -> x <> p)
+   (!(List.nth !(complete_db.points) difficulty));
+(*  Printf.printf "%i" (List.length !(List.nth !(complete_db.questions) difficulty)); *)
 	{
 		question = q;
 		answer = a;
