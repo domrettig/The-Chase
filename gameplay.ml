@@ -73,7 +73,7 @@ let phase_one () =
 	let start_time = Unix.gettimeofday () in
 	let rec body () = 
 		let curr_time = Unix.gettimeofday () in
-		if (curr_time -. start_time) <= 10. then begin
+		if (curr_time -. start_time) <= 90. then begin
 			serve_question ();
 			body ()
 		end

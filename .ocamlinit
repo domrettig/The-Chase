@@ -10,8 +10,9 @@
 #load "reader.d.cmo";;
 #load "pInput.d.cmo";;
 #load "gameplay.d.cmo";;
-
+#load "ai.d.cmo";;
 
 open Reader
 open Gameplay
 open PInput
+open Ai

@@ -5,4 +5,7 @@ returns the range of probability of making a correct guess*)
 val difficulty : int -> probability
 
 (* This determines the correctness of he AI's response *)
-val is_correct : probability -> Reader.question -> bool
+val ai_is_correct : probability -> Reader.question -> bool
+
+(* Returns the ai's answer *)
+val ai_answer : bool -> Reader.question -> string

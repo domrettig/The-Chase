@@ -1,6 +1,6 @@
 include Reader
 
-let remove_non_alpha = Str.global_replace (Str.regexp "[^a-z ]+") ""
+let remove_non_alpha = Str.global_replace (Str.regexp "[^a-z0-9 ]+") ""
 
 let explode = Str.split (Str.regexp " ") 
 
@@ -30,7 +30,7 @@ let one_word_ans q a =
 		match ans with
 		| [] -> false
 		| hd::tl -> 
-			(if hd = (strip (List.hd question.answer)) then
+			(if hd = (strip question.answer) then
 	    	true
 	    else
 		    helper question tl) in
@@ -39,11 +39,13 @@ let one_word_ans q a =
 (* long_ans ensures that all words in the correct answer are in the player's answer
  * i.e., the correct answer is a subset of the player's answer *)
 let long_ans q a =
+	let correct_ans = explode (q.answer) in
 	let ans = Str.split (Str.regexp " ") a in
-	List.fold_left (fun acc x -> acc && (List.mem (strip x) ans)) true (q.answer)
+	List.fold_left (fun acc x -> acc && (List.mem (strip x) ans)) true correct_ans
 
 let is_correct answer question =
-	let correct = if (List.length question.answer > 1) then
+	let correct_ans = explode (question.answer) in
+	let correct = if (List.length correct_ans > 1) then
 								  long_ans question answer
 								else
 									one_word_ans question answer in
