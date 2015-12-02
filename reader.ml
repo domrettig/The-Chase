@@ -80,6 +80,6 @@ val rand_question: unit -> question *)
 let rand_question () =
 	{
 		question = List.nth (List.nth complete_db.all_questions 0) 0;
-		answer = List.nth (List.nth complete_db.all_answers 0) 0;
+		answer = [List.nth (List.nth complete_db.all_answers 0) 0];
 		point = 0;
 	}
