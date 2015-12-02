@@ -1,8 +1,8 @@
 include Reader
 
 type player = {
-	score:int;
-	wallet: int;	
+	mutable wallet: int;
+	mutable bank: int	
 }
 
 type ai = {
@@ -10,7 +10,7 @@ type ai = {
 }
 
 type gameboard = {
-	pos:int;
+	mutable pos:int;
 }
 
 type actor = P of player | A of ai
@@ -22,13 +22,21 @@ type metadata = {
 	mutable curr_question: Reader.question option;
 }
 
+let player = {
+	wallet = 0;
+	bank = 0;
+}
+
+let ai = {
+	difficulty = 0;
+}
+
 let test_metadata = {
-	player={score=0; wallet=0;};
-	ai = {difficulty=0;};
+	player=player;
+	ai = ai;
 	difficulty = 0;
 	curr_question = None;
 }
-
 
 let get_served_question () : Reader.question =
 	let q = Reader.rand_question () in
@@ -40,17 +48,11 @@ let display_question (q:Reader.question option) : unit =
 	| None -> failwith "No question in metadata"
 	| Some x -> Printf.printf "Question: %s\n" x.question
 
-let is_one_word_ans q =
-	failwith "Unimplemented"
-
-let is_mult_word_ans q =
-	failwith "Unimplemented"
-
 let respond_to_answer p =
 	failwith "Unimplemented"
 
 let update_wallet n = 
-	failwith "Unimplemented"
+	player.wallet <- n
 
 let phase_one i =
 	failwith "Unimplemented"
