@@ -9,24 +9,24 @@ let json = Yojson.Basic.from_file command *)
 let json = Yojson.Basic.from_file "trivia.json"
 
 
-(* Extracts sets id or description (pass in option as "key") *)
-let get_id_desc key json =
-  member "sets" json
+(* Extracts sets id or description (pass in option as "key") based on difficuty*)
+let get_desc key difficulty json =
+  member difficulty json
   |> map (member key)
   |> to_list
   |> filter_string
 
-(* Extracts the  questions or answers and returns a bytes list*)
-let get_q_a key json=
- member "sets" json
+(* Extracts the questions or answers based of diff and returns a bytes list*)
+let get_q_a key difficulty json=
+ member difficulty json
   |> map (member key)
   |> to_list
   |> filter_list
   |> List.map filter_string
   |> List.map (fun x -> ref x)
-
-let get_points json =
-  member "sets" json
+(* Extracts the points based of diff and returns a bytes list*)
+let get_points difficulty json =
+  member difficulty json
   |> map (member "points")
   |> to_list
   |> filter_list
@@ -43,17 +43,28 @@ type question = {
 
 (*Represents the entire library of questions at a given difficulty level*)
 type question_db = {
-  ids: bytes list;
   descriptions: bytes list;
   questions: bytes list ref list ref;
   answers: bytes list ref list ref;
   points: int list ref list ref;
 }
 
-let complete_db = {ids=get_id_desc "id" json;
-descriptions=get_id_desc "description" json;
-questions=ref (get_q_a "questions" json); answers=ref (get_q_a "answers" json);
-points=ref (get_points json)}
+(* Creates a db of the easy questions (all types) *)
+let easy_db = {descriptions=get_desc "description" "easy" json;
+questions=ref (get_q_a "questions" "easy" json);
+answers=ref (get_q_a "answers" "easy" json);
+points=ref (get_points "easy" json)}
+(* Creates a db of the medium questions (all types) *)
+let medium_db = {descriptions=get_desc "description" "medium" json;
+questions=ref (get_q_a "questions" "medium" json);
+answers=ref (get_q_a "answers" "medium" json);
+ points=ref (get_points "medium" json)}
+(* Creates a db of the hard questions (all types) *)
+let hard_db = {descriptions=get_desc "description" "hard" json;
+questions=ref (get_q_a "questions" "hard" json);
+answers=ref (get_q_a "answers" "hard" json);
+points=ref (get_points "hard" json)}
+
 
 (* Removed item at given index of a list *)
 let rec remove l index counter=
@@ -66,6 +77,14 @@ let rec remove l index counter=
  * removes from the db
 val rand_question: unit -> question *)
 let rand_question difficulty =
+  (* Sets the db we will work with based on difficulty *)
+  let complete_db = (match difficulty with
+  | 0 -> easy_db
+  | 1 -> medium_db
+  | 2 -> hard_db
+  | _ -> failwith "invalid difficulty") in
+  (* Gets a questions from that difficulty in that category *NEED TO PASS IN A
+  CATEGORY SO I INDEX CORRECTLY RIGHT NOW ITS DUMB * *)
   Random.init(int_of_float(Unix.gettimeofday ()));
   let rand = Random.int (List.length !(List.nth !(complete_db.questions) difficulty)) in
   let q = List.nth !(List.nth !(complete_db.questions) difficulty) rand in
@@ -78,7 +97,7 @@ let rand_question difficulty =
    remove (!(List.nth !(complete_db.answers) difficulty)) rand (ref 0);
   List.nth !(complete_db.points) difficulty :=
    remove (!(List.nth !(complete_db.points) difficulty)) rand (ref 0);
-
+  (*Returns a random question*)
 	{
 		question = q;
 		answer = a;

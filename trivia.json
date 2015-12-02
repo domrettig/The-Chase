@@ -1,9 +1,8 @@
 {
-  "sets":
+  "easy":
   [
     {
-      "id": "Easy",
-      "description": "Trivia for kids",
+      "description": "Science",
       "questions": ["What food makes up nearly all (around 99%) of a Giant Panda’s diet?","True or false? Mice live for up to 10 years.",
       "What is the name of the phobia that involves an abnormal fear of spiders?","What is the largest type of ‘big cat’ in the world?",
       "True or false? Crocodiles have no sweat glands so they use their mouths to release heat.",
@@ -29,8 +28,7 @@
       "Kids","The giraffe","True","Its mane","8","200 million years"]
     },
     {
-      "id": "Medium",
-      "description": "Trivia for kids",
+      "description": "History",
       "questions": ["What food makes up nearly all (around 99%) of a Giant Panda’s diet?","True or false? Mice live for up to 10 years.",
       "What is the name of the phobia that involves an abnormal fear of spiders?","What is the largest type of ‘big cat’ in the world?",
       "True or false? Crocodiles have no sweat glands so they use their mouths to release heat.",
@@ -56,8 +54,7 @@
       "Kids","The giraffe","True","Its mane","8","200 million years"]
     },
     {
-      "id": "hard",
-      "description": "Trivia for kids",
+      "description": "Math",
       "questions": ["What food makes up nearly all (around 99%) of a Giant Panda’s diet?","True or false? Mice live for up to 10 years.",
       "What is the name of the phobia that involves an abnormal fear of spiders?","What is the largest type of ‘big cat’ in the world?",
       "True or false? Crocodiles have no sweat glands so they use their mouths to release heat.",
@@ -81,6 +78,48 @@
       "True","Antarctica", "True","cheetah", "A female deer", "False","Prides",
       "Yes","The elephant","False","Africa","2","The Gorilla","A fish","True","A mare",
       "Kids","The giraffe","True","Its mane","8","200 million years"]
+    }
+  ],
+  "medium":
+  [
+    {
+      "description": "Science",
+      "questions": ["Shit"],
+      "points": [1],
+      "answers": ["fuck"]
+    },
+    {
+      "description": "History",
+      "questions": ["A"],
+      "points": [5],
+      "answers": ["b"]
+    },
+    {
+      "description": "Math",
+      "questions": ["a"],
+      "points": [5],
+      "answers": ["o"]
+    }
+  ],
+  "hard":
+  [
+    {
+      "description": "Science",
+      "questions": ["asd"],
+      "points": [123],
+      "answers": ["ppp"]
+    },
+    {
+      "description": "History",
+      "questions": ["asdas"],
+      "points": [1234],
+      "answers": ["asdc"]
+    },
+    {
+      "description": "Math",
+      "questions": ["asd"],
+      "points": [14],
+      "answers": ["td"]
     }
   ]
 }
