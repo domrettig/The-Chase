@@ -52,7 +52,8 @@ let respond_to_answer p =
          else Printf.printf "That is incorrect!\n")
 
 let update_wallet n = 
-	test_metadata.player.wallet <- n
+	let new_val = n + test_metadata.player.wallet in
+	test_metadata.player.wallet <- new_val
 
 let serve_question () =
   let q = Reader.rand_question () in
@@ -66,14 +67,13 @@ let serve_question () =
   else ());
   Printf.printf "Your Wallet: %d\n" test_metadata.player.wallet
 
-
-let phase_one i =
-	Printf.printf "Welcome to The Chase!\n For this phase, answer as many questions as you can in 90 seconds. Press enter when you're ready.\n";
+let phase_one () =
+	Printf.printf "Welcome to The Chase!\nFor this phase, answer as many questions as you can in 90 seconds. Press enter when you're ready.\n";
 	let _ = read_line () in
 	let start_time = Unix.gettimeofday () in
 	let rec body () = 
 		let curr_time = Unix.gettimeofday () in
-		if (curr_time -. start_time) <= 90. then begin
+		if (curr_time -. start_time) <= 10. then begin
 			serve_question ();
 			body ()
 		end

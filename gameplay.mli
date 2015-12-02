@@ -31,7 +31,7 @@ val respond_to_answer : bool * bool -> unit
 val update_wallet : int -> unit
 
 (*Handles running phase one of the game, the one minute round/two minute round*)
-val phase_one : int -> unit
+val phase_one : unit -> unit
 
 (*Updates the amount of money in the bank*)
 val update_bank : float -> unit
