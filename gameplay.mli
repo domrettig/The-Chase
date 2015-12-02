@@ -28,7 +28,7 @@ val serve_question : unit -> unit
 val respond_to_answer : bool * bool -> unit
 
 (*Updates the amount of money in the players wallet*)
-val update_wallet : float -> unit
+val update_wallet : int -> unit
 
 (*Handles running phase one of the game, the one minute round/two minute round*)
 val phase_one : int -> unit
