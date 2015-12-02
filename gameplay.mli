@@ -28,7 +28,7 @@ val serve_question : unit -> unit
 val respond_to_answer : bool * bool -> unit
 
 (*Updates the amount of money in the players wallet*)
-val update_wallet : int -> unit
+val update_wallet : float -> unit
 
 (*Handles running phase one of the game, the one minute round/two minute round*)
 val phase_one : unit -> unit
@@ -41,6 +41,8 @@ val update_position: actor -> unit
 
 (*Determines whether the player has been caught by the chaser*)
 val caught : gameboard -> bool
+
+val init_gameboard : unit -> unit
 
 (*Handles the chase round, 8 questions*)
 val phase_two : unit -> unit
