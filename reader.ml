@@ -78,8 +78,8 @@ let parse_questions difficulty =
  * removes from the db
 val rand_question: unit -> question *)
 let rand_question () =
-{
-  question = "Just doing this for compilation check not implemented";
-  answer = [];
-  point = 0
-}
+	{
+		question = List.nth (List.nth complete_db.all_questions 0) 0;
+		answer = [List.nth (List.nth complete_db.all_answers 0) 0];
+		point = 0;
+	}
