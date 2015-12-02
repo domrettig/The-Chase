@@ -55,6 +55,12 @@ descriptions=get_id_desc "description" json;
 questions=ref (get_q_a "questions" json); answers=ref (get_q_a "answers" json);
 points=ref (get_points json)}
 
+(* Removed item at given index of a list *)
+let rec remove l index counter=
+  match l with
+  |[] -> failwith "Invalid index to remove"
+  |h::t -> if index = !counter then t else (counter := !counter+1; h::(
+  remove t index counter))
 
 (* Produces a random question based on difficulty level
  * removes from the db
@@ -66,19 +72,13 @@ let rand_question difficulty =
   let a = List.nth !(List.nth !(complete_db.answers) difficulty) rand in
   let p = List.nth !(List.nth !(complete_db.points) difficulty) rand in
   (* Removes question from db, along with points and answers *)
-
-(* WHAT IF MULTIPLE TRUE FALSE< THEN ANSWER REMOVES ALL OCCURENCES OF FALSE OR TRUE ETC *)
- (*  Printf.printf "%i" (List.length !(List.nth !(complete_db.questions) difficulty)); *)
   List.nth !(complete_db.questions) difficulty :=
-   List.filter (fun x -> x <> q)
-   (!(List.nth !(complete_db.questions) difficulty));
+   remove (!(List.nth !(complete_db.questions) difficulty)) rand (ref 0);
   List.nth !(complete_db.answers) difficulty :=
-   List.filter (fun x -> x <> a)
-   (!(List.nth !(complete_db.answers) difficulty));
+   remove (!(List.nth !(complete_db.answers) difficulty)) rand (ref 0);
   List.nth !(complete_db.points) difficulty :=
-   List.filter (fun x -> x <> p)
-   (!(List.nth !(complete_db.points) difficulty));
-(*  Printf.printf "%i" (List.length !(List.nth !(complete_db.questions) difficulty)); *)
+   remove (!(List.nth !(complete_db.points) difficulty)) rand (ref 0);
+
 	{
 		question = q;
 		answer = a;
