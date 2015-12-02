@@ -71,7 +71,7 @@ let update_wallet n =
 	test_metadata.player.wallet <- new_val
 
 let serve_question () =
-  let q = Reader.rand_question test_metadata.difficulty in
+  let q = Reader.rand_question test_metadata.difficulty test_metadata.curr_cat in
   test_metadata.curr_question <- Some q;
   display_question q;
   let ans = PInput.get_input () in 
@@ -93,7 +93,7 @@ let rec get_difficulty () =
 
 let rec get_category () =
 	Printf.printf "What category of questions do you want to answer?\n";
-	let cat = read_line ()
+	let cat = read_line () in
 	match (String.lowercase cat) with
 	| "science" -> test_metadata.curr_cat <- 0
 	| "history" -> test_metadata.curr_cat <- 1
@@ -103,6 +103,7 @@ let rec get_category () =
 let phase_one () =
 	Printf.printf "Welcome to The Chase!\nFor this phase, answer as many questions as you can in 90 seconds.\n";
 	get_difficulty ();
+	get_category ();
 	let start_time = Unix.gettimeofday () in
 	let rec body () = 
 		let curr_time = Unix.gettimeofday () in
@@ -153,7 +154,7 @@ let rec init_gameboard () =
 
 let rec head_to_head_question () =
 	(* Get question, display, and update metadata *)
-	let q = Reader.rand_question test_metadata.difficulty in
+	let q = Reader.rand_question test_metadata.difficulty test_metadata.curr_cat in
 	test_metadata.curr_question <- Some q;
 	display_question q;
 
@@ -187,6 +188,7 @@ and finished () =
 
 let phase_two () = 
 	init_gameboard ();
+	get_category ();
 	Printf.printf "These are timed questions. You have 10 seconds to answer.\n";
 	head_to_head_question ();
 	if test_metadata.player.wallet = 0. then
