@@ -14,4 +14,4 @@ type question_db
 
 (*Produces a random question based on difficulty leve
  * removes from the db *)
-val rand_question: int -> question
+val rand_question: int -> int -> question
