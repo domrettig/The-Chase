@@ -83,8 +83,6 @@ let rand_question difficulty category =
   | 1 -> medium_db
   | 2 -> hard_db
   | _ -> failwith "invalid difficulty") in
-  (* Gets a questions from that difficulty in that category *NEED TO PASS IN A
-  CATEGORY SO I INDEX CORRECTLY RIGHT NOW ITS DUMB * *)
   Random.init(int_of_float(Unix.gettimeofday ()));
   let rand = Random.int (List.length !(List.nth !(complete_db.questions) category)) in
   let q = List.nth !(List.nth !(complete_db.questions) category) rand in
