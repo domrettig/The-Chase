@@ -5,6 +5,8 @@ open Gameplay
  * to enter an answer. *)
 val timed_question : float -> string
 
+val timeout : bool ref
+
 (* Returns player input for answer to a trivia question *)
 val get_input : unit -> string
 
