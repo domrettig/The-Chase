@@ -47,9 +47,12 @@ let respond_to_answer p =
   | (correct, timeout) -> 
     if timeout then
       Printf.printf "You timed out!\n"
-    else if correct then
+    else (if correct then
            Printf.printf "That is correct!\n"
-         else Printf.printf "That is incorrect!\n"
+         else Printf.printf "That is incorrect!\n")
+
+let update_wallet n = 
+	test_metadata.player.wallet <- n
 
 let serve_question () =
   let q = Reader.rand_question () in
@@ -57,10 +60,12 @@ let serve_question () =
   display_question q;
   let ans = PInput.get_input () in 
   let (correct, timeout) = PInput.is_correct ans q in
-  respond_to_answer (correct, timeout)
+  respond_to_answer (correct, timeout);
+  (if correct && not timeout then
+    update_wallet q.point 
+  else ());
+  Printf.printf "Your Wallet: %d\n" test_metadata.player.wallet
 
-let update_wallet n = 
-	player.wallet <- n
 
 let phase_one i =
 	failwith "Unimplemented"
