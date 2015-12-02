@@ -95,7 +95,8 @@ let phase_one () =
 	body ()
 
 let update_bank n =
-	failwith "Unimplemented"
+	let new_val = test_metadata.player.bank +. n in
+	test_metadata.player.bank <- new_val
 
 let update_gameboard player_right ai_right =
 	match player_right, ai_right with
@@ -120,17 +121,14 @@ let rec init_gameboard () =
     test_metadata.gameboard.player_pos <- 10;
     test_metadata.gameboard.chaser_pos <- 2;
     test_metadata.player.wager <- (curr_wallet *. 0.5);
-    test_metadata.player.wallet <- (curr_wallet -. test_metadata.player.wager)
   | "b" ->
     test_metadata.gameboard.player_pos <- 9;
     test_metadata.gameboard.chaser_pos <- 1;
     test_metadata.player.wager <- (curr_wallet *. (2./.3.));
-    test_metadata.player.wallet <- (curr_wallet -. test_metadata.player.wager)
   | "c" ->
   	test_metadata.gameboard.player_pos <- 8;
     test_metadata.gameboard.chaser_pos <- 0;
     test_metadata.player.wager <- (curr_wallet);
-    test_metadata.player.wallet <- 0.
   |  _  -> Printf.printf "That is not a valid selection."; init_gameboard ()
 
 let rec head_to_head_question () =
@@ -155,11 +153,13 @@ and finished () =
 	(* If the player is at the bank *)
 	if test_metadata.gameboard.player_pos = test_metadata.gameboard.size then begin
 		Printf.printf "YOU WIN!\n";
-		test_metadata.player.bank <- test_metadata.player.wager
+		Printf.printf "You sucessfully banked $%f!\n" test_metadata.player.wager;
+		update_bank test_metadata.player.wager
 	end
 	(* If the Chaser caught the player *)
 	else if test_metadata.gameboard.player_pos = test_metadata.gameboard.chaser_pos then begin
 		Printf.printf "Sorry, the chaser caught you\n";
+		test_metadata.player.wallet <- (test_metadata.player.wallet -. test_metadata.player.wager);
 		test_metadata.player.wager <- 0.
 	end
 	else
@@ -168,7 +168,7 @@ and finished () =
 let phase_two () = 
 	init_gameboard ();
 	Printf.printf "These are timed questions. You have 10 seconds to answer.\n";
-	head_to_head_question ()
+	head_to_head_question ();
 	if test_metadata.player.wallet = 0. then
 		Printf.printf "You're out of money! Game over\n"
 	else
