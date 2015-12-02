@@ -63,7 +63,18 @@ let update_wallet n =
 	player.wallet <- n
 
 let phase_one i =
-	failwith "Unimplemented"
+	Printf.printf "Welcome to The Chase!\n For this phase, answer as many questions as you can in 90 seconds. Press enter when you're ready.\n";
+	let _ = read_line () in
+	let start_time = Unix.gettimeofday () in
+	let rec body () = 
+		let curr_time = Unix.gettimeofday () in
+		if (curr_time -. start_time) <= 90. then begin
+			serve_question ();
+			body ()
+		end
+		else
+			Printf.printf "Time's up!\n" in
+	body ()
 
 let update_bank n =
 	failwith "Unimplemented"
