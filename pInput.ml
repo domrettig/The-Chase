@@ -25,7 +25,6 @@ let timed_question (time:float) : string =
   end
   else input
 
-
 let one_word_ans q a =
 	let rec helper question ans =
 		match ans with
@@ -41,7 +40,7 @@ let one_word_ans q a =
  * i.e., the correct answer is a subset of the player's answer *)
 let long_ans q a =
 	let ans = Str.split (Str.regexp " ") a in
-	List.fold_left (fun acc x -> acc && (List.mem x ans)) true (q.answer)
+	List.fold_left (fun acc x -> acc && (List.mem (strip x) ans)) true (q.answer)
 
 let is_correct answer question =
 	let correct = if (List.length question.answer > 1) then
