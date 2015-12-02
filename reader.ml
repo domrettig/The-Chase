@@ -76,7 +76,7 @@ let rec remove l index counter=
 (* Produces a random question based on difficulty level
  * removes from the db
 val rand_question: unit -> question *)
-let rand_question difficulty =
+let rand_question difficulty category =
   (* Sets the db we will work with based on difficulty *)
   let complete_db = (match difficulty with
   | 0 -> easy_db
@@ -86,17 +86,17 @@ let rand_question difficulty =
   (* Gets a questions from that difficulty in that category *NEED TO PASS IN A
   CATEGORY SO I INDEX CORRECTLY RIGHT NOW ITS DUMB * *)
   Random.init(int_of_float(Unix.gettimeofday ()));
-  let rand = Random.int (List.length !(List.nth !(complete_db.questions) difficulty)) in
-  let q = List.nth !(List.nth !(complete_db.questions) difficulty) rand in
-  let a = List.nth !(List.nth !(complete_db.answers) difficulty) rand in
-  let p = List.nth !(List.nth !(complete_db.points) difficulty) rand in
+  let rand = Random.int (List.length !(List.nth !(complete_db.questions) category)) in
+  let q = List.nth !(List.nth !(complete_db.questions) category) rand in
+  let a = List.nth !(List.nth !(complete_db.answers) category) rand in
+  let p = List.nth !(List.nth !(complete_db.points) category) rand in
   (* Removes question from db, along with points and answers *)
-  List.nth !(complete_db.questions) difficulty :=
-   remove (!(List.nth !(complete_db.questions) difficulty)) rand (ref 0);
-  List.nth !(complete_db.answers) difficulty :=
-   remove (!(List.nth !(complete_db.answers) difficulty)) rand (ref 0);
-  List.nth !(complete_db.points) difficulty :=
-   remove (!(List.nth !(complete_db.points) difficulty)) rand (ref 0);
+  List.nth !(complete_db.questions) category :=
+   remove (!(List.nth !(complete_db.questions) category)) rand (ref 0);
+  List.nth !(complete_db.answers) category :=
+   remove (!(List.nth !(complete_db.answers) category)) rand (ref 0);
+  List.nth !(complete_db.points) category :=
+   remove (!(List.nth !(complete_db.points) category)) rand (ref 0);
   (*Returns a random question*)
 	{
 		question = q;
