@@ -1,8 +1,17 @@
 include Reader
 
+let remove_non_alpha = Str.global_replace (Str.regexp "[^a-z ]+") ""
+
+let explode = Str.split (Str.regexp " ") 
+
+let strip (ans:string) : string =
+  let exp_lower = explode (String.trim (String.lowercase ans)) in
+  let clean a x = if x<>"" then a ^ (x ^ " ") else a in
+    String.trim (List.fold_left clean "" (List.map remove_non_alpha exp_lower))
+
 let get_input () = 
 	Printf.printf "Answer: ";
-	read_line()
+	strip (read_line())
 
 let timeout = ref false
 
@@ -16,15 +25,6 @@ let timed_question (time:float) : string =
   end
   else input
 
-
-let remove_non_alpha = Str.global_replace (Str.regexp "[^a-z ]+") ""
-
-let explode = Str.split (Str.regexp " ") 
-
-let strip (ans:string) : string =
-  let exp_lower = explode (String.trim (String.lowercase ans)) in
-  let clean a x = if x<>"" then a ^ (x ^ " ") else a in
-    String.trim (List.fold_left clean "" (List.map remove_non_alpha exp_lower))
 
 let one_word_ans q a =
 	let rec helper question ans =

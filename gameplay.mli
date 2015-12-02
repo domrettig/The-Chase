@@ -16,7 +16,7 @@ type gameboard
 type actor
 
 (*Returns the current question served to the player*)
-val get_served_question : unit -> Reader.question
+val serve_question : unit -> unit
 
 (*Returns a bool if the passed in question has a single word as an answer*)
 val is_one_word_ans : Reader.question -> bool
@@ -31,7 +31,7 @@ val is_mult_word_ans : Reader.question -> bool
  * [a] is the correctness of the answer
  * [b] is true if timeout
  *)
-val respond_to_answer : bool * bool -> string
+val respond_to_answer : bool * bool -> unit
 
 (*Updates the amount of money in the players wallet*)
 val update_wallet : float -> unit
