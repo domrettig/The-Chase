@@ -30,7 +30,7 @@ let one_word_ans q a =
 		match ans with
 		| [] -> false
 		| hd::tl -> 
-			(if hd = (List.hd question.answer) then
+			(if hd = (strip (List.hd question.answer)) then
 	    	true
 	    else
 		    helper question tl) in
