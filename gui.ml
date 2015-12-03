@@ -3,7 +3,7 @@ open Lwt_react
 open Lwt
 open LTerm_widget
 
-let time = ref 91
+let time = ref 11
 let answer_ref = ref ""
 
 let get_time () =
@@ -11,6 +11,75 @@ let get_time () =
   if !time>0 then
     Printf.sprintf "%d" !time
   else Printf.sprintf "%s" "Times up!"
+
+let round_two_prescreen () =
+  let waiter, wakener = wait () in
+
+  let vbox = new vbox in
+  let title = new label "Round 2" in
+  let ins = new label "" in 
+  let input = new label "" in
+
+  let cat_set = ref false in
+  let board_set = ref false in
+
+  let update_info () = 
+    if input#text<>"" && not !board_set then begin
+      (* board_set := Gameplay.receive_board (input#text); *)
+      board_set := true;
+      (if not !board_set then
+        ins#set_text ("That is not a valid selection. Please chose A, B or C")
+      else begin
+        ins#set_text ("Please choose a category: Science, History or Math");
+        input#set_text "" end)
+    end
+    else (if input#text <> "" && not !cat_set then begin
+      cat_set := Gameplay.receive_cat (input#text);
+      (if not !cat_set then
+        ins#set_text ("That is not a valid category. Please select from Science, History or Math")
+      else begin
+        ins#set_text ("Ready to begin. Press Enter.");
+        input#set_text "" end)
+    end
+    else (if not !board_set then
+      let a = "(A) Start 4 spots away from the bank and wager 1/2 of the money in your wallet\n" in
+      let b = "(B) Start 5 spots away from the bank and wager 2/3 of the money in your wallet\n" in 
+      let c = "(C) Start 6 spots away from the bank and wager all of the money in your wallet\n" in
+      ins#set_text ("Please select an option to begin Round 2\n"^a^"\n"^b^"\n"^c)
+    else (if not !cat_set then
+      ins#set_text ("Please choose a category: Science, History or Math")
+    else failwith "Cool"(* ignore(Lwt_main.run (round_one ())) *)))) in
+
+  
+  let show_input s = 
+    s >|= Zed_utf8.singleton >>= 
+    fun x -> input#set_text (input#text ^ x); return () in
+
+
+  let backspace () =
+    let curr_text = input#text in
+    if curr_text <> "" then
+      input#set_text (String.sub curr_text 0 ((String.length curr_text) -1))
+    else () in
+
+  let handle_evt evt = 
+    match evt with
+    | LTerm_event.Key { LTerm_key.code = LTerm_key.Escape } -> wakeup wakener (); true
+    | LTerm_event.Key { LTerm_key.code = LTerm_key.Enter }  -> update_info (); true
+    | LTerm_event.Key { LTerm_key.code = LTerm_key.Char ch} -> ignore (show_input (return ch)); true
+    | LTerm_event.Key { LTerm_key.code = LTerm_key.Backspace} -> backspace (); true    
+    | _ -> false in
+
+  vbox#add title;
+  vbox#add ins;
+  vbox#add input;
+
+  vbox#on_event handle_evt;
+
+  Lazy.force LTerm.stdout
+  >>= fun term ->
+  run term vbox waiter
+
 
 
 let round_one () =
@@ -27,7 +96,7 @@ let round_one () =
   
   let update_label () = 
     if !time <= 0 then
-      ()
+      ignore(Lwt_main.run (round_two_prescreen ()))
     else
     let (response, new_bank) = Gameplay.receive_answer (answer#text) in
     game_response#set_text response;
@@ -39,12 +108,12 @@ let round_one () =
     s >|= Zed_utf8.singleton >>= 
     fun x -> 
       (* (answer#set_text (answer#text ^ x); return ()) in  *)
-      (let new_text = if !time<=0 then "Out of time!" else (answer#text ^ x) in
+      (let new_text = if !time<=0 then "Out of time! Press Enter to continue to Round 2" else (answer#text ^ x) in
         answer#set_text new_text; return ()) in
 
   let backspace () =
     if !time<= 0 then
-      ()
+      ignore(Lwt_main.run (round_two_prescreen ()))
     else
     let curr_text = answer#text in
     let to_remove = String.get curr_text ((String.length curr_text) - 1) in
