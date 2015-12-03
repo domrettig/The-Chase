@@ -5,6 +5,7 @@
 
 #require "yojson";;
 #require "str";;
+#require "batteries";;
 
 #directory "_build";;
 #load "reader.d.cmo";;
