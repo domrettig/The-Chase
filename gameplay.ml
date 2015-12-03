@@ -117,14 +117,14 @@ let serve_question () =
   else ());
   Printf.printf "Your Wallet: %f\n" metadata.player.wallet
 
-let rec get_difficulty () =
-	Printf.printf "Do you want to play on easy, medium, or hard? ";
-	let diff = read_line () in
+let rec receive_diff diff =
+	(* Printf.printf "Do you want to play on easy, medium, or hard? "; *)
+	(* let diff = read_line () in *)
 	match (String.lowercase diff) with
-	| "easy" 		-> metadata.difficulty <- 0
-	| "medium" 	-> metadata.difficulty <- 1
-	| "hard" 		-> metadata.difficulty <- 2
-	| _ 				-> Printf.printf "Not a difficulty.\n"; get_difficulty ()
+	| "easy" 		-> metadata.difficulty <- 0; true
+	| "medium" 	-> metadata.difficulty <- 1; true
+	| "hard" 		-> metadata.difficulty <- 2; true
+	| _ 				-> false
 
 let rec get_available_cat (left: (int * bytes) list) =
 	match left with
@@ -134,37 +134,43 @@ let rec get_available_cat (left: (int * bytes) list) =
 								  name ^ "\n" ^ (get_available_cat t)
 								else (get_available_cat t))
 
-let rec get_category () =
-	Printf.printf "What category of questions do you want to answer?\n";
+let rec receive_cat cat =
+	(* Printf.printf "What category of questions do you want to answer?\n";
 	Printf.printf "%s" (get_available_cat categories);
-	let cat = read_line () in
+	let cat = read_line () in *)
 	match (String.lowercase cat) with
 	| "science" -> 
 	  if List.mem 0 metadata.used_cat then begin
-	    Printf.printf "You have already used the category Science.\n"; get_category ()
+	    false
 	  end
-	  else 
+	  else begin
 	    metadata.used_cat <- (metadata.used_cat @ [0]);
-	    metadata.curr_cat <- 0
+	    metadata.curr_cat <- 0;
+	    true
+	  end
 	| "history" ->
 	  if List.mem 1 metadata.used_cat then begin
-	    Printf.printf "You have already used the category History.\n"; get_category ()
+	    false
 	  end
-	  else 
+	  else begin
 	    metadata.used_cat <- (metadata.used_cat @ [1]);
-	    metadata.curr_cat <- 1
+	    metadata.curr_cat <- 1;
+	    true
+	  end
 	| "math" 		-> 
 	  if List.mem 2 metadata.used_cat then begin 
-	    Printf.printf "You have already used the category Math.\n"; get_category ()
+	    false
 	  end
-	  else 
+	  else begin
 	    metadata.used_cat <- (metadata.used_cat @ [2]);
-	    metadata.curr_cat <- 2
-	| _ 				-> Printf.printf "Not a valid category.\n"; get_category ()
+	    metadata.curr_cat <- 2;
+	    true
+	  end
+	| _ 				-> false
 
 let phase_one () =
-	get_difficulty ();
-	get_category ();
+	(* get_difficulty ();
+	get_category (); *)
 	let start_time = Unix.gettimeofday () in
 	let rec body () = 
 		let curr_time = Unix.gettimeofday () in
@@ -248,7 +254,7 @@ and finished () =
 
 let phase_two () = 
 	init_gameboard ();
-	get_category ();
+	(* get_category (); *)
 	Printf.printf "These are timed questions. You have 10 seconds to answer.\n";
 	head_to_head_question ();
 	if metadata.player.wallet = 0. then
