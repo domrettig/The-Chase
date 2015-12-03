@@ -184,7 +184,7 @@ let update_gameboard player_right ai_right =
 let caught g = 
 	failwith "Unimplemented"
 
-let rec init_gameboard () = 
+(* let rec init_gameboard () = 
   Printf.printf "Please select an option to begin Round 2\n";
   Printf.printf "(A) Start 4 spots away from the bank and wager 1/2 of the money in your wallet\n";
   Printf.printf "(B) Start 5 spots away from the bank and wager 2/3 of the money in your wallet\n";
@@ -204,7 +204,27 @@ let rec init_gameboard () =
   	metadata.gameboard.player_pos <- 8;
     metadata.gameboard.chaser_pos <- 0;
     metadata.player.wager <- (curr_wallet);
-  |  _  -> Printf.printf "That is not a valid selection."; init_gameboard ()
+  |  _  -> Printf.printf "That is not a valid selection."; *) (* init_gameboard () *)
+
+let receive_board ans =
+  let curr_wallet = metadata.player.wallet in
+  match (String.lowercase ans) with
+  | "a" -> 
+    metadata.gameboard.player_pos <- 10;
+    metadata.gameboard.chaser_pos <- 2;
+    metadata.player.wager <- (curr_wallet *. 0.5);
+    true
+  | "b" ->
+    metadata.gameboard.player_pos <- 9;
+    metadata.gameboard.chaser_pos <- 1;
+    metadata.player.wager <- (curr_wallet *. (2./.3.));
+    true
+  | "c" ->
+  	metadata.gameboard.player_pos <- 8;
+    metadata.gameboard.chaser_pos <- 0;
+    metadata.player.wager <- (curr_wallet);
+    true
+  |  _  -> false
 
 let rec head_to_head_question () =
 	(* Get question, display, and update metadata *)
@@ -240,7 +260,7 @@ and finished () =
 		head_to_head_question ()
 
 let phase_two () = 
-	init_gameboard ();
+	(* init_gameboard (); *)
 	(* get_category (); *)
 	Printf.printf "These are timed questions. You have 10 seconds to answer.\n";
 	head_to_head_question ();
