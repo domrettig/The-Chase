@@ -1,4 +1,4 @@
-include Gameplay_mock
+include Gameplay
 open Lwt_react
 open Lwt
 open LTerm_widget
@@ -8,7 +8,9 @@ let answer_ref = ref ""
 
 let get_time () =
   time := (!time - 1);
-  Printf.sprintf "%d" !time
+  if !time>0 then
+    Printf.sprintf "%d" !time
+  else Printf.sprintf "%s" "Times up!"
 
 
 let main () =
@@ -17,22 +19,33 @@ let main () =
   let vbox = new vbox in
   let clock = new label (get_time ()) in
   let bank = new label "$" in
-  let question = new label (Gameplay_mock.serve_question ()) in
+  let question = new label (Gameplay.send_question ()) in
   let answer = new label ("Answer: ") in
   let game_response = new label "" in
   let button = new button "Press esc to exit" in
   let submit = new button "Press enter to submit" in
   
   let update_label () = 
-  	let (response, new_bank) = Gameplay_mock.receive_answer (answer#text) in
-  	game_response#set_text response;
-  	bank#set_text ("$" ^ new_bank);
-  	answer#set_text "Answer: ";
-  	question#set_text (Gameplay_mock.serve_question ()) in
+    if !time <= 0 then
+      ()
+    else
+    let (response, new_bank) = Gameplay.receive_answer (answer#text) in
+    game_response#set_text response;
+    bank#set_text ("$" ^ new_bank);
+    answer#set_text "Answer: ";
+    question#set_text (Gameplay.send_question ()) in
 
-  let show_answer s = s >|= Zed_utf8.singleton >>= fun x -> (answer#set_text (answer#text ^ x); return ()) in 
+  let show_answer s = 
+    s >|= Zed_utf8.singleton >>= 
+    fun x -> 
+      (* (answer#set_text (answer#text ^ x); return ()) in  *)
+      (let new_text = if !time<=0 then "Out of time!" else (answer#text ^ x) in
+        answer#set_text new_text; return ()) in
 
   let backspace () =
+    if !time<= 0 then
+      ()
+    else
     let curr_text = answer#text in
     let to_remove = String.get curr_text ((String.length curr_text) - 1) in
     if to_remove<>':' then
@@ -42,7 +55,7 @@ let main () =
 
 
   let handle_evt evt = 
-  	match evt with
+    match evt with
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Escape } -> wakeup wakener (); true
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Enter }  -> update_label (); true
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Char ch} -> ignore (show_answer (return ch)); true
@@ -72,4 +85,4 @@ let main () =
   >>= fun term ->
   run term vbox waiter
 
-let () = Lwt_main.run (main ())
+(* let () = Lwt_main.run (main ()) *)

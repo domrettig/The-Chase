@@ -56,6 +56,22 @@ let metadata = {
 	gameboard = gameboard;
 }
 
+(*##############################################################*)
+
+let test_num = ref 0
+let test_bank = ref 0
+
+let send_question () = 
+	test_num := (!test_num + 1);
+	"Sample Question " ^ (string_of_int !test_num) ^ "\n"
+
+let receive_answer a = 
+	Printf.printf "Answer receieved: %s\n" a;
+	test_bank := (!test_bank + 10);
+	("Thats correct!", string_of_int(!test_bank))
+
+
+(*##############################################################*)
 let categories = [(0, "Science");(1, "History");(2, "Math")]
 
 let display_question (q:Reader.question) : unit = 

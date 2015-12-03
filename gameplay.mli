@@ -12,6 +12,13 @@ type ai
 (*Holds data about round 2 gameboard*)
 type gameboard
 
+(*#############################################*)
+
+val send_question : unit -> bytes
+
+val receive_answer : bytes -> (bytes * bytes)
+
+(*#############################################*)
 (*Returns the current question served to the player*)
 val serve_question : unit -> unit
 

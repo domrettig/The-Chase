@@ -6,14 +6,17 @@
 #require "yojson";;
 #require "str";;
 #require "batteries";;
+#require "lambda-term";;
 
 #directory "_build";;
 #load "reader.d.cmo";;
 #load "pInput.d.cmo";;
 #load "ai.d.cmo";;
 #load "gameplay.d.cmo";;
+#load "gui.d.cmo";;
 
 open Reader
 open Ai
 open Gameplay
+open Gui
 open PInput
