@@ -1,0 +1,5 @@
+DIFF: EASY
+CAT: SCIENCE
+QUESTION: Why is Dom a fuckboy?
+ANSWER: He was born that way
+PTS: 10
