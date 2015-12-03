@@ -31,6 +31,10 @@ val serve_question : unit -> unit
  *)
 val respond_to_answer : bool * bool -> string
 
+val receive_diff : string -> bool
+
+val receive_cat : string -> bool
+
 (*Updates the amount of money in the players wallet*)
 val update_wallet : float -> unit
 
