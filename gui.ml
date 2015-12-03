@@ -129,11 +129,18 @@ let main_menu () =
     fun x -> input#set_text (input#text ^ x); return () in
 
 
+  let backspace () =
+    let curr_text = input#text in
+    if curr_text <> "" then
+      input#set_text (String.sub curr_text 0 ((String.length curr_text) -1))
+    else () in
+
   let handle_evt evt = 
     match evt with
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Escape } -> wakeup wakener (); true
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Enter }  -> update_info (); true
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Char ch} -> ignore (show_input (return ch)); true
+    | LTerm_event.Key { LTerm_key.code = LTerm_key.Backspace} -> backspace (); true    
     | _ -> false in
 
   vbox#add title;

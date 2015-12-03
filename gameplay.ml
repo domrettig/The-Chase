@@ -60,12 +60,7 @@ let metadata = {
 
 (*##############################################################*)
 
-let test_num = ref 0
-let test_bank = ref 0
-
 let send_question () = 
-	(* test_num := (!test_num + 1);
-	"Sample Question " ^ (string_of_int !test_num) ^ "\n" *)
 	let q = Reader.rand_question metadata.difficulty metadata.curr_cat in
 	metadata.curr_question <- q;
 	q.question
@@ -92,9 +87,6 @@ let update_wallet n =
 	metadata.player.wallet <- new_val
 
 let receive_answer a = 
-	Printf.printf "Answer receieved: %s\n" a;
-	(* test_bank := (!test_bank + 10);
-	("Thats correct!", string_of_int(!test_bank)) *)
 	let ans = String.sub a 8 ((String.length a) - 8) in
 	let (correct, timeout) = PInput.is_correct ans metadata.curr_question in
 	(if correct && not timeout then begin
@@ -118,8 +110,6 @@ let serve_question () =
   Printf.printf "Your Wallet: %f\n" metadata.player.wallet
 
 let rec receive_diff diff =
-	(* Printf.printf "Do you want to play on easy, medium, or hard? "; *)
-	(* let diff = read_line () in *)
 	match (String.lowercase diff) with
 	| "easy" 		-> metadata.difficulty <- 0; true
 	| "medium" 	-> metadata.difficulty <- 1; true
@@ -135,9 +125,6 @@ let rec get_available_cat (left: (int * bytes) list) =
 								else (get_available_cat t))
 
 let rec receive_cat cat =
-	(* Printf.printf "What category of questions do you want to answer?\n";
-	Printf.printf "%s" (get_available_cat categories);
-	let cat = read_line () in *)
 	match (String.lowercase cat) with
 	| "science" -> 
 	  if List.mem 0 metadata.used_cat then begin
