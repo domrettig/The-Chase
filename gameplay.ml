@@ -54,6 +54,8 @@ let test_metadata = {
 	gameboard = gameboard;
 }
 
+let categories = [(0, "Science");(1, "History");(2, "Math")]
+
 let display_question (q:Reader.question) : unit = 
 	Printf.printf "Question: %s\n" q.question
 
@@ -90,8 +92,17 @@ let rec get_difficulty () =
 	| "hard" 		-> test_metadata.difficulty <- 2
 	| _ 				-> Printf.printf "Not a difficulty.\n"; get_difficulty ()
 
+let rec get_available_cat (left: (int * bytes) list) =
+	match left with
+	| [] -> ""
+	| h::t -> (match h with
+				| (id, name) -> if not (List.mem id test_metadata.used_cat) then
+								  name ^ "\n" ^ (get_available_cat t)
+								else (get_available_cat t))
+
 let rec get_category () =
 	Printf.printf "What category of questions do you want to answer?\n";
+	Printf.printf "%s" (get_available_cat categories);
 	let cat = read_line () in
 	match (String.lowercase cat) with
 	| "science" -> 
