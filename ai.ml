@@ -5,7 +5,8 @@ type probability = float list
 type dictionary = string list
 
 (* Get a new seed *)
-let seed () = Random.init (int_of_float (Unix.gettimeofday()))
+let seed () =
+	Random.self_init();;
 
 let gen_dict () : dictionary =
 	(* FROM: http://camltastic.blogspot.com/2008/09/tip-read-all-lines-from-file-most.html *)
@@ -31,7 +32,7 @@ let difficulty (i:int) : probability =
 	else
 		[0.8;1.0]
 
-let ai_is_correct i q =
+let ai_is_correct i =
 	seed ();
 	let range = difficulty i in
 	let prob = (Random.float 0.2) +. (List.hd range) in
