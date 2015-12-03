@@ -23,81 +23,64 @@
       "How many legs does a spider have?"," The crocodile species is believed to have been around for how long? 2 million years or 200 million years?"],
       "points": [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],
       "answers": ["Bamboo","False", "Arachnophobia", "tiger","True","Yes","Cows",
-      "True","Antarctica", "True","cheetah", "A female deer", "False","Prides",
-      "Yes","The elephant","False","Africa","2","The Gorilla","A fish","True","A mare",
-      "Kids","The giraffe","True","Its mane","8","200 million years"]
+      "True","Antarctica", "True","cheetah", "deer", "False","Prides",
+      "Yes","elephant","False","Africa","2","Gorilla","fish","True","mare",
+      "Kids","giraffe","True","mane","8","200"]
+    },
+     {
+      "description": "Geography",
+      "questions": [],
+      "points": [],
+      "answers": []
     },
     {
       "description": "History",
-      "questions": ["What food makes up nearly all (around 99%) of a Giant Panda’s diet?","True or false? Mice live for up to 10 years.",
-      "What is the name of the phobia that involves an abnormal fear of spiders?","What is the largest type of ‘big cat’ in the world?",
-      "True or false? Crocodiles have no sweat glands so they use their mouths to release heat.",
-      "Are butterflies insects?","What are female elephants called?","True or false? Bats are mammals.",
-      "Bees are found on every continent of earth except for one, which is it?",
-      "True or false? Cats spend an average of 13 to 14 hours a day sleeping.",
-      "What is the fastest land animal in the world?","A ‘doe’ is what kind of animal?",
-      "True or false? Cougar’s are herbivores.","Groups of lions are known as what?",
-      "Is a dolphin a mammal?","What is the largest land animal in the world?",
-      "True of false? Snakes have slimy skin.",
-      "What is the only continent on earth where Giraffes live in the wild?",
-      "How many pairs of wings does a bee have?","What type of animal is the largest primate in the world?",
-      "Is a shark a fish or a mammal?",
-      "True or false? Owls are far-sighted, meaning that anything within a few inches of their eyes can’t be seen properly.",
-      "What is the name of an adult female horse?","What are baby goats called?",
-      "What is the tallest animal in the world?","True or false? Rabbits are born blind.",
-      "What is the most recognizable physical feature of the male lion?",
-      "How many legs does a spider have?"," The crocodile species is believed to have been around for how long? 2 million years or 200 million years?"],
-      "points": [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],
-      "answers": ["Bamboo","False", "Arachnophobia", "tiger","True","Yes","Cows",
-      "True","Antarctica", "True","cheetah", "A female deer", "False","Prides",
-      "Yes","The elephant","False","Africa","2","The Gorilla","A fish","True","A mare",
-      "Kids","The giraffe","True","Its mane","8","200 million years"]
+      "questions": ["What is the capital city of America?","Who was the first American president?",
+      "In which city is the Empire State Building located?","What year was the declaration of independence?",
+      "Saint Patrick is the Patron Saint of which country?","Pharaoh is the title given to the rulers of which ancient country",
+      "Which Italian city is famous for its leaning tower?","In the nursery rhyme, who sat on a wall before having a great fall?",
+      "Which big country is closest to New Zealand?","What is the capital of England?","True/False: Abraham Lincoln was the first U.S. President to wear a beard while in office."],
+      "points": [10,10,10,10,10,10,10,10,10,10,10],
+      "answers": ["Washington","George Washington","New York","1776","Ireland",
+      "Egypt","Pisa","Humpty Dumpty","Australia","London","True"]
     },
     {
       "description": "Math",
-      "questions": ["What food makes up nearly all (around 99%) of a Giant Panda’s diet?","True or false? Mice live for up to 10 years.",
-      "What is the name of the phobia that involves an abnormal fear of spiders?","What is the largest type of ‘big cat’ in the world?",
-      "True or false? Crocodiles have no sweat glands so they use their mouths to release heat.",
-      "Are butterflies insects?","What are female elephants called?","True or false? Bats are mammals.",
-      "Bees are found on every continent of earth except for one, which is it?",
-      "True or false? Cats spend an average of 13 to 14 hours a day sleeping.",
-      "What is the fastest land animal in the world?","A ‘doe’ is what kind of animal?",
-      "True or false? Cougar’s are herbivores.","Groups of lions are known as what?",
-      "Is a dolphin a mammal?","What is the largest land animal in the world?",
-      "True of false? Snakes have slimy skin.",
-      "What is the only continent on earth where Giraffes live in the wild?",
-      "How many pairs of wings does a bee have?","What type of animal is the largest primate in the world?",
-      "Is a shark a fish or a mammal?",
-      "True or false? Owls are far-sighted, meaning that anything within a few inches of their eyes can’t be seen properly.",
-      "What is the name of an adult female horse?","What are baby goats called?",
-      "What is the tallest animal in the world?","True or false? Rabbits are born blind.",
-      "What is the most recognizable physical feature of the male lion?",
-      "How many legs does a spider have?"," The crocodile species is believed to have been around for how long? 2 million years or 200 million years?"],
-      "points": [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],
-      "answers": ["Bamboo","False", "Arachnophobia", "tiger","True","Yes","Cows",
-      "True","Antarctica", "True","cheetah", "A female deer", "False","Prides",
-      "Yes","The elephant","False","Africa","2","The Gorilla","A fish","True","A mare",
-      "Kids","The giraffe","True","Its mane","8","200 million years"]
+      "questions": ["What is the distance around a circle called?"],
+      "points": [10],
+      "answers": ["Circumference"]
     }
   ],
   "medium":
   [
     {
       "description": "Science",
-      "questions": ["Shit"],
-      "points": [1],
-      "answers": ["fuck"]
+      "questions": ["From what tree do acorns come?","How many years are there in a millennium?",
+      "What sweet food made by bees using nectar from flowers?"],
+      "points": [20,20,20],
+      "answers": ["Oak","1000","Honey"]
+    },
+    {
+      "description": "Geography",
+      "questions": [],
+      "points": [],
+      "answers": []
     },
     {
       "description": "History",
-      "questions": ["A"],
-      "points": [5],
-      "answers": ["b"]
+      "questions": ["How many wives did Henry VIII have?","What amendment limits the president two terms (EIGHT (8) YEARS)?",
+      "An English colonist in Virginia introduced and planted tobacco in the colonies. Who was it",
+      "What was the name of Abraham Lincoln's wife?","Who was the first US President to live in the White House?",
+      "Which 20th Century political leader's motto was, Never Give In. Never Give In. Never. Never. Never.",
+      "What cruel and destructive tribe from western Asia conquered much of central and eastern Europe during the fifth century",
+      "Which New World location did the Mayflower land?"],
+      "points": [20,20,20,20,20,20,20,20],
+      "answers": ["6","22","John Rolfe","Mary Todd","Adams","Churchill","Huns", "Plymouth"]
     },
     {
       "description": "Math",
       "questions": ["a"],
-      "points": [5],
+      "points": [20],
       "answers": ["o"]
     }
   ],
@@ -106,19 +89,28 @@
     {
       "description": "Science",
       "questions": ["asd"],
-      "points": [123],
+      "points": [30],
       "answers": ["ppp"]
+    },
+     {
+      "description": "Geography",
+      "questions": ["What is the second largest city in Japan?"],
+      "points": [30],
+      "answers": ["Yokohama"]
     },
     {
       "description": "History",
-      "questions": ["asdas"],
-      "points": [1234],
-      "answers": ["asdc"]
+      "questions": ["Which U.S. President in 1823 declared that the United States would not tolerate European intervention in the Americas.",
+      "Which military general is said to have wept because there were no worlds left to conquer?",
+      "In 1839, a Scottish inventor named Kirkpatrick Macmillan created a product which helps people get from point A to point B. Millions of this product have been sold. What was it?",
+      " What peoples conquered England at the Battle of Hastings in 1066?"],
+      "points": [30,30,30],
+      "answers": ["JAMES MONROE","ALEXANDER THE GREAT", "Bicycle","Normans"]
     },
     {
       "description": "Math",
       "questions": ["asd"],
-      "points": [14],
+      "points": [30],
       "answers": ["td"]
     }
   ]
