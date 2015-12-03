@@ -29,7 +29,7 @@ val serve_question : unit -> unit
  * [a] is the correctness of the answer
  * [b] is true if timeout
  *)
-val respond_to_answer : bool * bool -> unit
+val respond_to_answer : bool * bool -> string
 
 (*Updates the amount of money in the players wallet*)
 val update_wallet : float -> unit

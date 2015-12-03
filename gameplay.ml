@@ -28,6 +28,7 @@ type metadata = {
 	mutable curr_cat: int;
 	mutable used_cat: int list;
 	mutable gameboard: gameboard;
+	mutable curr_question: Reader.question
 }
 
 let player = {
@@ -54,6 +55,7 @@ let metadata = {
 	curr_cat = 0;
 	used_cat = [];
 	gameboard = gameboard;
+	curr_question = {question="";answer="";point=0}
 }
 
 (*##############################################################*)
@@ -62,13 +64,12 @@ let test_num = ref 0
 let test_bank = ref 0
 
 let send_question () = 
-	test_num := (!test_num + 1);
-	"Sample Question " ^ (string_of_int !test_num) ^ "\n"
+	(* test_num := (!test_num + 1);
+	"Sample Question " ^ (string_of_int !test_num) ^ "\n" *)
+	let q = Reader.rand_question metadata.difficulty metadata.curr_cat in
+	metadata.curr_question <- q;
+	q.question
 
-let receive_answer a = 
-	Printf.printf "Answer receieved: %s\n" a;
-	test_bank := (!test_bank + 10);
-	("Thats correct!", string_of_int(!test_bank))
 
 
 (*##############################################################*)
@@ -81,21 +82,34 @@ let respond_to_answer p =
   match p with
   | (correct, timeout) -> 
     if timeout then
-      Printf.printf "You timed out!\n"
+      "You timed out!\n"
     else (if correct then
-           Printf.printf "That is correct!\n"
-         else Printf.printf "That is incorrect!\n")
+           "That is correct!\n"
+         else "That is incorrect!\n")
 
 let update_wallet n = 
 	let new_val = n +. metadata.player.wallet in
 	metadata.player.wallet <- new_val
+
+let receive_answer a = 
+	Printf.printf "Answer receieved: %s\n" a;
+	(* test_bank := (!test_bank + 10);
+	("Thats correct!", string_of_int(!test_bank)) *)
+	let ans = String.sub a 8 ((String.length a) - 8) in
+	let (correct, timeout) = PInput.is_correct ans metadata.curr_question in
+	(if correct && not timeout then begin
+  	metadata.player.num_right <- metadata.player.num_right + 1;
+    update_wallet (float_of_int metadata.curr_question.point)
+  end
+  else ());
+	(respond_to_answer(correct,timeout),string_of_float(metadata.player.wallet))
 
 let serve_question () =
   let q = Reader.rand_question metadata.difficulty metadata.curr_cat in
   display_question q;
   let ans = PInput.get_input () in 
   let (correct, timeout) = PInput.is_correct ans q in
-  respond_to_answer (correct, timeout);
+  (* respond_to_answer (correct, timeout); *)
   (if correct && not timeout then begin
   	metadata.player.num_right <- metadata.player.num_right + 1;
     update_wallet (float_of_int q.point)
@@ -212,7 +226,7 @@ let rec head_to_head_question () =
 	Printf.printf "The correct answer is %s\n" q.answer;
 
 	let (p_correct,p_timeout) = PInput.is_correct ans q in
-	respond_to_answer (p_correct,p_timeout);
+	(* respond_to_answer (p_correct,p_timeout); *)
 	update_gameboard p_correct ai_correct;
 	finished ()
 
@@ -259,7 +273,7 @@ let rec show_answers count = function
 							   display_question q;
 							   let ans = PInput.get_input () in 
 							   let (correct, timeout) = PInput.is_correct ans q in
-							   respond_to_answer (correct, timeout);
+							   (* respond_to_answer (correct, timeout); *)
 							   (if correct then metadata.player.num_right <- metadata.player.num_right + 1
 							 	 else ());
 								 show_answers count tl

@@ -85,4 +85,4 @@ let main () =
   >>= fun term ->
   run term vbox waiter
 
-(* let () = Lwt_main.run (main ()) *)
+let () = Lwt_main.run (main ())
