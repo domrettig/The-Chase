@@ -12,6 +12,95 @@ let get_time () =
     Printf.sprintf "%d" !time
   else Printf.sprintf "%s" "Times up!"
 
+let round_two () =
+  let waiter, wakener = wait () in
+
+  let time = ref 11 in
+
+  let reset_time () = 
+    time := 11 in
+
+  let new_get_time () = 
+    time := (!time - 1);
+    if !time>0 then
+      Printf.sprintf "%d" !time
+    else Printf.sprintf "%s" "Times up!" in
+
+  let vbox = new vbox in
+  let clock = new label (new_get_time ()) in
+  let question = new label (Gameplay.send_question ()) in
+  let answer = new label ("Answer: ") in
+  let game_response = new label "" in
+  let button = new button "Press esc to exit" in
+  let submit = new button "Press enter to submit" in
+
+  let update_label () =
+    if Gameplay.caught () then
+      let response = Gameplay.phase_two_end false in
+      answer#set_text ("You've been caught by the chaser! " ^ response);
+      ignore(exit 0)
+    else if Gameplay.at_bank () then
+      let response = Gameplay.phase_two_end true in
+      answer#set_text ("You've made it safely to the bank! " ^ response);
+      ignore(exit 0)
+    else (
+      let (response, new_bank, _, ai_ans) = Gameplay.receive_head_to_head (answer#text) in
+      let new_response = response ^ " The Chaser answered with " ^ ai_ans in
+      game_response#set_text new_response;
+      answer#set_text "Answer: ";
+      question#set_text (Gameplay.send_question ());
+      reset_time ()) in
+
+  let show_answer s = 
+    s >|= Zed_utf8.singleton >>= 
+    fun x -> 
+      (* (answer#set_text (answer#text ^ x); return ()) in  *)
+      (let new_text = if !time<=0 then "Out of time! Press Enter to continue to next question" else (answer#text ^ x) in
+        answer#set_text new_text; return ()) in
+
+  let backspace () =
+    if !time<= 0 then
+      (* ignore(Lwt_main.run (round_two_prescreen ())) *)
+      ignore(Printf.sprintf "%s" "TESTING")
+    else
+    let curr_text = answer#text in
+    let to_remove = String.get curr_text ((String.length curr_text) - 1) in
+    if to_remove<>':' then
+      answer#set_text (String.sub curr_text 0 ((String.length curr_text) -1))
+    else () in
+
+
+
+  let handle_evt evt = 
+    match evt with
+    | LTerm_event.Key { LTerm_key.code = LTerm_key.Escape } -> wakeup wakener (); true
+    | LTerm_event.Key { LTerm_key.code = LTerm_key.Enter }  -> update_label (); true
+    | LTerm_event.Key { LTerm_key.code = LTerm_key.Char ch} -> ignore (show_answer (return ch)); true
+    | LTerm_event.Key { LTerm_key.code = LTerm_key.Backspace} -> backspace (); true
+    | _ -> false in
+
+  vbox#add clock;
+  vbox#add button;
+  vbox#add submit;
+  vbox#add question;
+  vbox#add answer;
+  vbox#add game_response;
+
+  (* Update the time every second. *)
+  ignore (Lwt_engine.on_timer 1.0 true (fun _ -> clock#set_text (new_get_time ())));
+  (* ignore (Lwt_engine.on_timer 0.2 true (fun _ -> show_answer ())); *)
+  (* Quit when the exit button is clicked. *)
+  (* button#on_click (fun () -> wakeup_exn wakener Exit); *)
+
+
+  button#on_event handle_evt;
+  submit#on_event handle_evt;
+
+  (* Run in the standard terminal. *)
+  Lazy.force LTerm.stdout
+  >>= fun term ->
+  run term vbox waiter
+
 let round_two_prescreen () =
   let waiter, wakener = wait () in
 
@@ -48,7 +137,7 @@ let round_two_prescreen () =
       ins#set_text ("Please select an option to begin Round 2\n"^a^"\n"^b^"\n"^c)
     else (if not !cat_set then
       ins#set_text ("Please choose a category: Science, History or Math")
-    else failwith "Cool"(* ignore(Lwt_main.run (round_one ())) *)))) in
+    else ignore(Lwt_main.run (round_two ()))))) in
 
   
   let show_input s = 

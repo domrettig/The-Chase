@@ -50,7 +50,13 @@ val update_bank : float -> unit
 val update_gameboard: bool -> bool -> unit
 
 (*Determines whether the player has been caught by the chaser*)
-val caught : gameboard -> bool
+val caught : unit -> bool
+
+val at_bank : unit -> bool
+
+val receive_head_to_head : string -> string * string * bool * string
+
+val phase_two_end : bool -> string
 
 (* val init_gameboard : unit -> unit *)
 

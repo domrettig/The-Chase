@@ -181,8 +181,11 @@ let update_gameboard player_right ai_right =
 	| false, true  -> metadata.gameboard.chaser_pos <- metadata.gameboard.chaser_pos + 1
 	| false, false -> ()
 
-let caught g = 
-	failwith "Unimplemented"
+let caught () = 
+	metadata.gameboard.player_pos = metadata.gameboard.chaser_pos
+
+let at_bank () =
+	metadata.gameboard.player_pos = (metadata.gameboard.size - 1)
 
 (* let rec init_gameboard () = 
   Printf.printf "Please select an option to begin Round 2\n";
@@ -258,6 +261,29 @@ and finished () =
 	end
 	else
 		head_to_head_question ()
+
+let phase_two_end win = 
+	if win then begin
+		update_bank metadata.player.wager;
+		let response = "You successfully banked $" ^ string_of_float(metadata.player.wager) in
+		response
+	end
+	else begin
+		metadata.player.wallet <- (metadata.player.wallet -. metadata.player.wager);
+		metadata.player.wager <- 0.;
+		if metadata.player.wallet = 0. then
+			"You're out of money! Game over."
+		else
+			"You didn't win, but you're not out of money. On to phase three."
+	end
+
+let receive_head_to_head s =
+	let response, new_bank = receive_answer s in
+	let ai_correct = Ai.ai_is_correct metadata.difficulty in
+	let ai_ans = Ai.ai_answer ai_correct metadata.curr_question in
+	let player_correct = response = "That is correct!\n" in
+	update_gameboard player_correct ai_correct;
+	(response, new_bank, ai_correct, ai_ans)
 
 let phase_two () = 
 	(* init_gameboard (); *)
