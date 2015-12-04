@@ -35,6 +35,8 @@ val receive_diff : string -> bool
 
 val receive_cat : string -> bool
 
+val receive_board : string -> bool
+
 (*Updates the amount of money in the players wallet*)
 val update_wallet : float -> unit
 
@@ -50,7 +52,7 @@ val update_gameboard: bool -> bool -> unit
 (*Determines whether the player has been caught by the chaser*)
 val caught : gameboard -> bool
 
-val init_gameboard : unit -> unit
+(* val init_gameboard : unit -> unit *)
 
 (*Handles the chase round, 8 questions*)
 val phase_two : unit -> unit

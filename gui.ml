@@ -25,8 +25,8 @@ let round_two_prescreen () =
 
   let update_info () = 
     if input#text<>"" && not !board_set then begin
-      (* board_set := Gameplay.receive_board (input#text); *)
-      board_set := true;
+      board_set := Gameplay.receive_board (input#text);
+      (* board_set := true; *)
       (if not !board_set then
         ins#set_text ("That is not a valid selection. Please chose A, B or C")
       else begin
