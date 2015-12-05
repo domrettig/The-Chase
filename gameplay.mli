@@ -62,7 +62,10 @@ val receive_head_to_head : string -> string * string * bool * string
 
 val phase_two_end : bool -> string
 
+
 val send_ai_list : unit -> bool list
+
+val receive_positions : unit -> string
 
 (* val init_gameboard : unit -> unit *)
 

@@ -277,6 +277,11 @@ and finished () =
 	else
 		head_to_head_question ()
 
+let receive_positions () = 
+	"Player at position " ^ (string_of_int metadata.gameboard.player_pos) ^ "\n" ^
+	"Chaser at position " ^ (string_of_int metadata.gameboard.chaser_pos) ^ "\n" ^
+	"Bank is at " ^ (string_of_int (metadata.gameboard.size - 1)) ^ "\n"
+
 let phase_two_end win =
 	if win then begin
 		update_bank metadata.player.wager;
