@@ -17,10 +17,10 @@ let round_two () =
 
   let time = ref 11 in
 
-  let reset_time () = 
+  let reset_time () =
     time := 11 in
 
-  let new_get_time () = 
+  let new_get_time () =
     time := (!time - 1);
     if !time>0 then
       Printf.sprintf "%d" !time
@@ -51,9 +51,9 @@ let round_two () =
       question#set_text (Gameplay.send_question ());
       reset_time ()) in
 
-  let show_answer s = 
-    s >|= Zed_utf8.singleton >>= 
-    fun x -> 
+  let show_answer s =
+    s >|= Zed_utf8.singleton >>=
+    fun x ->
       (* (answer#set_text (answer#text ^ x); return ()) in  *)
       (let new_text = if !time<=0 then "Out of time! Press Enter to continue to next question" else (answer#text ^ x) in
         answer#set_text new_text; return ()) in
@@ -71,7 +71,7 @@ let round_two () =
 
 
 
-  let handle_evt evt = 
+  let handle_evt evt =
     match evt with
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Escape } -> wakeup wakener (); true
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Enter }  -> update_label (); true
@@ -106,42 +106,42 @@ let round_two_prescreen () =
 
   let vbox = new vbox in
   let title = new label "Round 2" in
-  let ins = new label "" in 
+  let ins = new label "" in
   let input = new label "" in
 
   let cat_set = ref false in
   let board_set = ref false in
 
-  let update_info () = 
+  let update_info () =
     if input#text<>"" && not !board_set then begin
       board_set := Gameplay.receive_board (input#text);
       (* board_set := true; *)
       (if not !board_set then
         ins#set_text ("That is not a valid selection. Please chose A, B or C")
       else begin
-        ins#set_text ("Please choose a category: Science, History or Math");
+        ins#set_text ("Please choose a category: Science, History, Music, or Geography");
         input#set_text "" end)
     end
     else (if input#text <> "" && not !cat_set then begin
       cat_set := Gameplay.receive_cat (input#text);
       (if not !cat_set then
-        ins#set_text ("That is not a valid category. Please select from Science, History or Math")
+        ins#set_text ("That is not a valid category or has already been used.\n Please select from Science, History, Music or Geography")
       else begin
         ins#set_text ("Ready to begin. Press Enter.");
         input#set_text "" end)
     end
     else (if not !board_set then
       let a = "(A) Start 4 spots away from the bank and wager 1/2 of the money in your wallet\n" in
-      let b = "(B) Start 5 spots away from the bank and wager 2/3 of the money in your wallet\n" in 
+      let b = "(B) Start 5 spots away from the bank and wager 2/3 of the money in your wallet\n" in
       let c = "(C) Start 6 spots away from the bank and wager all of the money in your wallet\n" in
       ins#set_text ("Please select an option to begin Round 2\n"^a^"\n"^b^"\n"^c)
     else (if not !cat_set then
-      ins#set_text ("Please choose a category: Science, History or Math")
+      ins#set_text ("Please choose a category: Science, History, Music, or Geography")
     else ignore(Lwt_main.run (round_two ()))))) in
 
-  
-  let show_input s = 
-    s >|= Zed_utf8.singleton >>= 
+
+  let show_input s =
+    s >|= Zed_utf8.singleton >>=
     fun x -> input#set_text (input#text ^ x); return () in
 
 
@@ -151,12 +151,12 @@ let round_two_prescreen () =
       input#set_text (String.sub curr_text 0 ((String.length curr_text) -1))
     else () in
 
-  let handle_evt evt = 
+  let handle_evt evt =
     match evt with
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Escape } -> wakeup wakener (); true
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Enter }  -> update_info (); true
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Char ch} -> ignore (show_input (return ch)); true
-    | LTerm_event.Key { LTerm_key.code = LTerm_key.Backspace} -> backspace (); true    
+    | LTerm_event.Key { LTerm_key.code = LTerm_key.Backspace} -> backspace (); true
     | _ -> false in
 
   vbox#add title;
@@ -182,8 +182,8 @@ let round_one () =
   let game_response = new label "" in
   let button = new button "Press esc to exit" in
   let submit = new button "Press enter to submit" in
-  
-  let update_label () = 
+
+  let update_label () =
     if !time <= 0 then
       ignore(Lwt_main.run (round_two_prescreen ()))
     else
@@ -193,9 +193,9 @@ let round_one () =
     answer#set_text "Answer: ";
     question#set_text (Gameplay.send_question ()) in
 
-  let show_answer s = 
-    s >|= Zed_utf8.singleton >>= 
-    fun x -> 
+  let show_answer s =
+    s >|= Zed_utf8.singleton >>=
+    fun x ->
       (* (answer#set_text (answer#text ^ x); return ()) in  *)
       (let new_text = if !time<=0 then "Out of time! Press Enter to continue to Round 2" else (answer#text ^ x) in
         answer#set_text new_text; return ()) in
@@ -212,7 +212,7 @@ let round_one () =
 
 
 
-  let handle_evt evt = 
+  let handle_evt evt =
     match evt with
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Escape } -> wakeup wakener (); true
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Enter }  -> update_label (); true
@@ -243,34 +243,34 @@ let round_one () =
   >>= fun term ->
   run term vbox waiter
 
-let main_menu () = 
+let main_menu () =
   let waiter, wakener = wait () in
 
   let diff_set = ref false in
   let cat_set = ref false in
 
-  let vbox = new vbox in 
+  let vbox = new vbox in
   let title = new label "The Chase" in
   let ins = new label "Press enter to begin" in
   let input = new label "" in
   let setup_question = new label "" in
 
 
-  
 
-  let update_info () = 
+
+  let update_info () =
     if input#text<>"" && not !diff_set then begin
       diff_set := Gameplay.receive_diff (input#text);
       (if not !diff_set then
         setup_question#set_text ("That is not a valid difficulty. Please select easy, medium or hard")
       else begin
-        setup_question#set_text ("Please choose a category: Science, History or Math");
+        setup_question#set_text ("Please choose a category: Science, History, Music, or Geography");
         input#set_text "" end)
     end
     else (if input#text <> "" && not !cat_set then begin
       cat_set := Gameplay.receive_cat (input#text);
       (if not !cat_set then
-        setup_question#set_text ("That is not a valid category. Please select from Science, History or Math")
+        setup_question#set_text ("That is not a valid category or has already been used.\n Please select from Science, History, Music, or Geography")
       else begin
         setup_question#set_text ("Ready to begin. Press Enter.");
         input#set_text "" end)
@@ -278,12 +278,12 @@ let main_menu () =
     else (if not !diff_set then
       setup_question#set_text ("Do you want to play on easy, medium, or hard? ")
     else (if not !cat_set then
-      setup_question#set_text ("Please choose a category: Science, History or Math")
+      setup_question#set_text ("Please choose a category: Science, History, Music, or Geography")
     else ignore(Lwt_main.run (round_one ()))))) in
 
-  
-  let show_input s = 
-    s >|= Zed_utf8.singleton >>= 
+
+  let show_input s =
+    s >|= Zed_utf8.singleton >>=
     fun x -> input#set_text (input#text ^ x); return () in
 
 
@@ -293,12 +293,12 @@ let main_menu () =
       input#set_text (String.sub curr_text 0 ((String.length curr_text) -1))
     else () in
 
-  let handle_evt evt = 
+  let handle_evt evt =
     match evt with
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Escape } -> wakeup wakener (); true
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Enter }  -> update_info (); true
     | LTerm_event.Key { LTerm_key.code = LTerm_key.Char ch} -> ignore (show_input (return ch)); true
-    | LTerm_event.Key { LTerm_key.code = LTerm_key.Backspace} -> backspace (); true    
+    | LTerm_event.Key { LTerm_key.code = LTerm_key.Backspace} -> backspace (); true
     | _ -> false in
 
   vbox#add title;
@@ -308,7 +308,7 @@ let main_menu () =
 
 
   vbox#on_event handle_evt;
-  
+
   Lazy.force LTerm.stdout
   >>= fun term ->
   run term vbox waiter

@@ -60,7 +60,7 @@ let metadata = {
 
 (*##############################################################*)
 
-let send_question () = 
+let send_question () =
 	let q = Reader.rand_question metadata.difficulty metadata.curr_cat in
 	metadata.curr_question <- q;
 	q.question
@@ -68,25 +68,25 @@ let send_question () =
 
 
 (*##############################################################*)
-let categories = [(0, "Science");(1, "History");(2, "Math")]
+let categories = [(0, "Science");(1, "History");(2, "Music");(3, "Geography")]
 
-let display_question (q:Reader.question) : unit = 
+let display_question (q:Reader.question) : unit =
 	Printf.printf "Question: %s\n" q.question
 
 let respond_to_answer p =
   match p with
-  | (correct, timeout) -> 
+  | (correct, timeout) ->
     if timeout then
       "You timed out!\n"
     else (if correct then
            "That is correct!\n"
          else "That is incorrect!\n")
 
-let update_wallet n = 
+let update_wallet n =
 	let new_val = n +. metadata.player.wallet in
 	metadata.player.wallet <- new_val
 
-let receive_answer a = 
+let receive_answer a =
 	let ans = String.sub a 8 ((String.length a) - 8) in
 	let (correct, timeout) = PInput.is_correct ans metadata.curr_question in
 	(if correct && not timeout then begin
@@ -99,7 +99,7 @@ let receive_answer a =
 let serve_question () =
   let q = Reader.rand_question metadata.difficulty metadata.curr_cat in
   display_question q;
-  let ans = PInput.get_input () in 
+  let ans = PInput.get_input () in
   let (correct, timeout) = PInput.is_correct ans q in
   (* respond_to_answer (correct, timeout); *)
   (if correct && not timeout then begin
@@ -126,7 +126,7 @@ let rec get_available_cat (left: (int * bytes) list) =
 
 let rec receive_cat cat =
 	match (String.lowercase cat) with
-	| "science" -> 
+	| "science" ->
 	  if List.mem 0 metadata.used_cat then begin
 	    false
 	  end
@@ -144,8 +144,8 @@ let rec receive_cat cat =
 	    metadata.curr_cat <- 1;
 	    true
 	  end
-	| "math" 		-> 
-	  if List.mem 2 metadata.used_cat then begin 
+	| "music" 		->
+	  if List.mem 2 metadata.used_cat then begin
 	    false
 	  end
 	  else begin
@@ -153,13 +153,22 @@ let rec receive_cat cat =
 	    metadata.curr_cat <- 2;
 	    true
 	  end
+  | "geography" ->
+    if List.mem 3 metadata.used_cat then begin
+      false
+    end
+    else begin
+      metadata.used_cat <- (metadata.used_cat @ [3]);
+      metadata.curr_cat <- 3;
+      true
+    end
 	| _ 				-> false
 
 let phase_one () =
 	(* get_difficulty ();
 	get_category (); *)
 	let start_time = Unix.gettimeofday () in
-	let rec body () = 
+	let rec body () =
 		let curr_time = Unix.gettimeofday () in
 		if (curr_time -. start_time) <= 10. then begin
 			serve_question ();
@@ -181,13 +190,13 @@ let update_gameboard player_right ai_right =
 	| false, true  -> metadata.gameboard.chaser_pos <- metadata.gameboard.chaser_pos + 1
 	| false, false -> ()
 
-let caught () = 
+let caught () =
 	metadata.gameboard.player_pos = metadata.gameboard.chaser_pos
 
 let at_bank () =
 	metadata.gameboard.player_pos = (metadata.gameboard.size - 1)
 
-(* let rec init_gameboard () = 
+(* let rec init_gameboard () =
   Printf.printf "Please select an option to begin Round 2\n";
   Printf.printf "(A) Start 4 spots away from the bank and wager 1/2 of the money in your wallet\n";
   Printf.printf "(B) Start 5 spots away from the bank and wager 2/3 of the money in your wallet\n";
@@ -195,7 +204,7 @@ let at_bank () =
   let ans = PInput.get_input () in
   let curr_wallet = metadata.player.wallet in
   match ans with
-  | "a" -> 
+  | "a" ->
     metadata.gameboard.player_pos <- 10;
     metadata.gameboard.chaser_pos <- 2;
     metadata.player.wager <- (curr_wallet *. 0.5);
@@ -212,7 +221,7 @@ let at_bank () =
 let receive_board ans =
   let curr_wallet = metadata.player.wallet in
   match (String.lowercase ans) with
-  | "a" -> 
+  | "a" ->
     metadata.gameboard.player_pos <- 10;
     metadata.gameboard.chaser_pos <- 2;
     metadata.player.wager <- (curr_wallet *. 0.5);
@@ -262,7 +271,7 @@ and finished () =
 	else
 		head_to_head_question ()
 
-let phase_two_end win = 
+let phase_two_end win =
 	if win then begin
 		update_bank metadata.player.wager;
 		let response = "You successfully banked $" ^ string_of_float(metadata.player.wager) in
@@ -285,7 +294,7 @@ let receive_head_to_head s =
 	update_gameboard player_correct ai_correct;
 	(response, new_bank, ai_correct, ai_ans)
 
-let phase_two () = 
+let phase_two () =
 	(* init_gameboard (); *)
 	(* get_category (); *)
 	Printf.printf "These are timed questions. You have 10 seconds to answer.\n";
@@ -310,7 +319,7 @@ let rec show_answers count = function
 	| false::tl -> Printf.printf "The Chaser answered incorrectly. Your turn to try and answer.\n";
 								 let q = Reader.rand_question metadata.difficulty metadata.curr_cat in
 							   display_question q;
-							   let ans = PInput.get_input () in 
+							   let ans = PInput.get_input () in
 							   let (correct, timeout) = PInput.is_correct ans q in
 							   (* respond_to_answer (correct, timeout); *)
 							   (if correct then metadata.player.num_right <- metadata.player.num_right + 1
