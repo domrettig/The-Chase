@@ -87,7 +87,7 @@ let update_wallet n =
 	metadata.player.wallet <- new_val
 
 let receive_answer a =
-	let ans = String.sub a 8 ((String.length a) - 8) in
+	let ans = String.sub a 7 ((String.length a) - 7) in
 	let (correct, timeout) = PInput.is_correct ans metadata.curr_question in
 	(if correct && not timeout then begin
   	metadata.player.num_right <- metadata.player.num_right + 1;
@@ -108,6 +108,12 @@ let serve_question () =
   end
   else ());
   Printf.printf "Your Wallet: %f\n" metadata.player.wallet
+
+let send_wallet () =
+	"$" ^ (string_of_float metadata.player.wallet)
+
+let send_total () = 
+  (2. *. metadata.player.wallet) +. metadata.player.bank
 
 let rec receive_diff diff =
 	match (String.lowercase diff) with
@@ -310,6 +316,9 @@ let ai_answer_questions () =
 		if i = 0 then []
 		else (Ai.ai_is_correct metadata.difficulty)::(create_list l (i-1)) in
 	create_list [] num_seen
+
+let send_ai_list () = 
+	ai_answer_questions ()
 
 let rec show_answers count = function
 	| []        -> ()

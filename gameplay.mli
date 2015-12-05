@@ -31,6 +31,10 @@ val serve_question : unit -> unit
  *)
 val respond_to_answer : bool * bool -> string
 
+val send_wallet : unit -> string
+
+val send_total : unit -> float
+
 val receive_diff : string -> bool
 
 val receive_cat : string -> bool
@@ -57,6 +61,8 @@ val at_bank : unit -> bool
 val receive_head_to_head : string -> string * string * bool * string
 
 val phase_two_end : bool -> string
+
+val send_ai_list : unit -> bool list
 
 (* val init_gameboard : unit -> unit *)
 
