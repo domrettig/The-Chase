@@ -242,8 +242,6 @@ let round_two () =
   let submit = new button "Press enter to submit" in
 
   let update_label () =
-    let places = Gameplay.receive_positions () in
-    positions#set_text places;
     if Gameplay.caught () then
       let response = Gameplay.phase_two_end false in
       answer#set_text ("You've been caught by the chaser! " ^ response);
@@ -261,7 +259,9 @@ let round_two () =
       game_response#set_text new_response;
       answer#set_text "Answer: ";
       question#set_text (Gameplay.send_question ());
-      reset_time ()) in
+      reset_time ());
+    let places = Gameplay.receive_positions () in
+    positions#set_text places in
 
   let show_answer s =
     s >|= Zed_utf8.singleton >>=
