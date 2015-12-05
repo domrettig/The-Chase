@@ -58,6 +58,8 @@ val receive_head_to_head : string -> string * string * bool * string
 
 val phase_two_end : bool -> string
 
+val receive_positions : unit -> string
+
 (* val init_gameboard : unit -> unit *)
 
 (*Handles the chase round, 8 questions*)

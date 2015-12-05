@@ -29,12 +29,15 @@ let round_two () =
   let vbox = new vbox in
   let clock = new label (new_get_time ()) in
   let question = new label (Gameplay.send_question ()) in
+  let positions = new label (Gameplay.receive_positions()) in
   let answer = new label ("Answer: ") in
   let game_response = new label "" in
   let button = new button "Press esc to exit" in
   let submit = new button "Press enter to submit" in
 
   let update_label () =
+    let places = Gameplay.receive_positions () in
+    positions#set_text places;
     if Gameplay.caught () then
       let response = Gameplay.phase_two_end false in
       answer#set_text ("You've been caught by the chaser! " ^ response);
@@ -44,8 +47,9 @@ let round_two () =
       answer#set_text ("You've made it safely to the bank! " ^ response);
       ignore(exit 0)
     else (
-      let (response, new_bank, _, ai_ans) = Gameplay.receive_head_to_head (answer#text) in
-      let new_response = response ^ " The Chaser answered with " ^ ai_ans in
+      let (response, new_bank, ai_correct, ai_ans) = Gameplay.receive_head_to_head (answer#text) in
+      let correct = if ai_correct then " correctly " else " incorrectly " in
+      let new_response = response ^ " The Chaser answered" ^ correct ^ "with " ^ ai_ans in
       game_response#set_text new_response;
       answer#set_text "Answer: ";
       question#set_text (Gameplay.send_question ());
@@ -82,6 +86,7 @@ let round_two () =
   vbox#add clock;
   vbox#add button;
   vbox#add submit;
+  vbox#add positions;
   vbox#add question;
   vbox#add answer;
   vbox#add game_response;
