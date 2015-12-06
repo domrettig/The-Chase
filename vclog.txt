@@ -1,0 +1,866 @@
+commit b6417a649fd10bfe395498bdeb6d6d4c0287b463
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Sat Dec 5 23:11:39 2015 -0500
+
+    README.txt created
+
+ README.txt | 40 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+
+commit 30f4f9fa908b3bb71cb39a4705671c8057631b66
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Sat Dec 5 22:59:35 2015 -0500
+
+    GUI doc
+
+ gui.ml | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
+
+commit b1cd7123915823491764963e843efa72805e6c74
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Sat Dec 5 22:31:33 2015 -0500
+
+    Added commments/removed unnecessary functions
+
+ ai.ml        |  5 +++--
+ convert.ml   | 61 ------------------------------------------------------------
+ convert.mli  |  8 --------
+ gameplay.ml  | 46 +++++++++++++++++++++++----------------------
+ gameplay.mli | 46 +++++++++++++++++++--------------------------
+ pInput.ml    | 18 ++----------------
+ pInput.mli   |  9 ---------
+ 7 files changed, 48 insertions(+), 145 deletions(-)
+
+commit bc937a84aabe0e0a3aa9b8cf73a77b8a638b4cf7
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Sat Dec 5 18:23:34 2015 -0500
+
+    Positions on gameboard now update immediately after answering question
+
+ gui.ml | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 4bc58db00bec9ee0efa12ab36f4aca7514b09be7
+Merge: b3e9361 523b278
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Sat Dec 5 18:11:48 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+    
+    Conflicts:
+    	gameplay.mli
+
+commit b3e9361319563751c0714dc87e62b84fc2bd0b42
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Sat Dec 5 18:11:00 2015 -0500
+
+    Round 3 gui
+
+ gameplay.ml  |  11 ++-
+ gameplay.mli |   6 ++
+ gui.ml       | 218 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++--
+ 3 files changed, 229 insertions(+), 6 deletions(-)
+
+commit 523b278673339c2fccd34a5b9b8af95e66f53df4
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Sat Dec 5 15:56:51 2015 -0500
+
+    Phase 2 displays positions of player and chaser, also explicitly says if chaser answered correctly or incorrectly
+
+ gameplay.ml  | 5 +++++
+ gameplay.mli | 2 ++
+ gui.ml       | 9 +++++++--
+ 3 files changed, 14 insertions(+), 2 deletions(-)
+
+commit 4f7ab152ce4d9a8db1315c9e91570869eb7b0ae3
+Author: Mike <mhw66@cornell.edu>
+Date:   Sat Dec 5 14:42:45 2015 -0500
+
+    accounts for all categories
+
+ gameplay.ml | 45 ++++++++++++++++++++++----------------
+ gui.ml      | 72 ++++++++++++++++++++++++++++++-------------------------------
+ 2 files changed, 63 insertions(+), 54 deletions(-)
+
+commit e8c34760284e1196d351a113e0dccd152909962d
+Author: Mike <mhw66@cornell.edu>
+Date:   Fri Dec 4 18:54:33 2015 -0500
+
+    Finished sets of trivia questions.
+
+ trivia.json | 454 +++++++++++++++++++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 422 insertions(+), 32 deletions(-)
+
+commit 491e2e0f19db9d8a52a4d49f8781a3e87a8d42a6
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Fri Dec 4 13:01:17 2015 -0500
+
+    Phase two GUI done
+
+ gameplay.ml  | 30 ++++++++++++++++++--
+ gameplay.mli |  8 +++++-
+ gui.ml       | 91 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 3 files changed, 125 insertions(+), 4 deletions(-)
+
+commit bad0bab741fe0f44d9cefc85c31a10579f413002
+Author: Mike <mhw66@cornell.edu>
+Date:   Fri Dec 4 00:44:26 2015 -0500
+
+    formatting
+
+ trivia.json | 336 ++++++++++++++++++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 303 insertions(+), 33 deletions(-)
+
+commit c0e35e6fb1ca0df8ddd3609f006933e744b8d37f
+Merge: 05b8697 3d75eec
+Author: Mike <mhw66@cornell.edu>
+Date:   Fri Dec 4 00:10:32 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit 05b8697a929c6d7c25bec2011c4bc174143c28cf
+Author: Mike <mhw66@cornell.edu>
+Date:   Fri Dec 4 00:09:40 2015 -0500
+
+    All hard mode questions done, 4 categories - added music cat.
+
+ trivia.json | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
+
+commit 3d75eec014431450811e826ea0710a0296084903
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Thu Dec 3 17:24:18 2015 -0500
+
+    Implemented receive_board
+
+ gameplay.ml  | 26 +++++++++++++++++++++++---
+ gameplay.mli |  4 +++-
+ gui.ml       |  4 ++--
+ 3 files changed, 28 insertions(+), 6 deletions(-)
+
+commit 83c74a4a5056b9c5f4b6ca7938b3145ab0151344
+Merge: 4fec6c5 f5bd9bc
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Thu Dec 3 17:13:09 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit f5bd9bc0ce3df978465c6a74836180856d7dda78
+Author: Mike <mhw66@cornell.edu>
+Date:   Thu Dec 3 17:14:33 2015 -0500
+
+    Need to account for more categories, fixed json so its works with the code we have right now
+
+ trivia.json | 36 ++++++++++++++++++------------------
+ 1 file changed, 18 insertions(+), 18 deletions(-)
+
+commit 4fec6c5852e3da23006c51c23442e3f7bf66ddec
+Merge: 21cf94c cd89259
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Thu Dec 3 17:12:56 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit 21cf94cb62db36d6baa7a0a0458f64bd7f5438f1
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Thu Dec 3 17:12:38 2015 -0500
+
+    round 2 prescreen done, still needs gameplay update
+
+ gui.ml | 77 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 73 insertions(+), 4 deletions(-)
+
+commit cd892591ac0c111ab5b936b07b420f8f2a9da596
+Merge: 01eb9eb dc0c40a
+Author: Mike <mhw66@cornell.edu>
+Date:   Thu Dec 3 17:11:04 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit 01eb9eb6e4df88b186d00be6d848914f69ffcc8d
+Author: Mike <mhw66@cornell.edu>
+Date:   Thu Dec 3 17:10:49 2015 -0500
+
+    More categories, working on questions
+
+ trivia.json | 114 ++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 53 insertions(+), 61 deletions(-)
+
+commit dc0c40a5078df01c17555fd8da4418345f665078
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Thu Dec 3 16:47:52 2015 -0500
+
+    Backspace functionality to main menu screen
+
+ gameplay.ml | 13 -------------
+ gui.ml      |  7 +++++++
+ 2 files changed, 7 insertions(+), 13 deletions(-)
+
+commit 5ccac731943efda1e58b14ba59d4799f6b70f303
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Thu Dec 3 16:45:06 2015 -0500
+
+    GUI works for pre-stage 1 and stage 1
+
+ gameplay.ml  |  52 ++++++++++++-----------
+ gameplay.mli |   4 ++
+ gui.ml       | 132 ++++++++++++++++++++++++++++++-----------------------------
+ 3 files changed, 100 insertions(+), 88 deletions(-)
+
+commit 3c7911b38f0e7c74762adcacaee0426cda25fb88
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Thu Dec 3 16:16:48 2015 -0500
+
+    main menu in progress
+
+ gui.ml | 70 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 67 insertions(+), 3 deletions(-)
+
+commit 51d3ab1c063b142cddca7232dc83acb54a04fb60
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Thu Dec 3 15:45:10 2015 -0500
+
+    GUI almost working for phase 1
+
+ gameplay.ml  | 38 ++++++++++++++++++++++++++------------
+ gameplay.mli |  2 +-
+ gui.ml       |  2 +-
+ 3 files changed, 28 insertions(+), 14 deletions(-)
+
+commit 1a6ccc851f3360cb25b1f8bdc82e56958df9a141
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Thu Dec 3 15:21:41 2015 -0500
+
+    compiling with gui works, updated ocamlinit
+
+ .ocamlinit   |  3 +++
+ gameplay.ml  | 16 ++++++++++++++++
+ gameplay.mli |  7 +++++++
+ gui.ml       | 37 +++++++++++++++++++++++++------------
+ main.ml      |  1 +
+ 5 files changed, 52 insertions(+), 12 deletions(-)
+
+commit 1831c39715ca28e680cc9f87967415025a540d9f
+Merge: 849fb4a 9a927ff
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Thu Dec 3 14:52:39 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit 849fb4a0508592a7936724d4efb3bb8a2c321ef5
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Thu Dec 3 14:52:32 2015 -0500
+
+    Round 1 GUI in progress
+
+ gui.ml  | 75 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ gui.mli | 10 ---------
+ 2 files changed, 75 insertions(+), 10 deletions(-)
+
+commit 9a927ffb159a6f6f254169bd14d4bb4720452f8f
+Merge: 157c102 217f43c
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Thu Dec 3 01:06:51 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit 157c1021c082d107bf2b65ade691d50c494440b8
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Thu Dec 3 01:06:37 2015 -0500
+
+    Implemented phase three
+
+ ai.ml       |   5 ++-
+ ai.mli      |   2 +-
+ gameplay.ml | 137 ++++++++++++++++++++++++++++++++++++++----------------------
+ 3 files changed, 90 insertions(+), 54 deletions(-)
+
+commit 217f43c9deb2a80695cea5c46c35751d421e0e10
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Wed Dec 2 22:33:39 2015 -0500
+
+    convert scrapped, dreams ruined
+
+ .ocamlinit    |  1 +
+ convert.ml    | 61 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ convert.mli   |  2 +-
+ questions.txt |  5 +++++
+ 4 files changed, 68 insertions(+), 1 deletion(-)
+
+commit fcc6b8fa6d10255890488b7de04773e50473834d
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Wed Dec 2 20:36:58 2015 -0500
+
+    Displays available categories for rounds
+
+ gameplay.ml | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+commit 7cc3fcfff3af4a82f3be45dfee20d2d2a3a35313
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Wed Dec 2 17:21:21 2015 -0500
+
+    Player can only select each category once per game
+
+ gameplay.ml | 30 +++++++++++++++++++++++-------
+ 1 file changed, 23 insertions(+), 7 deletions(-)
+
+commit 1798adacfdb3f48c71d62199c64c9a8e402d59ea
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 17:10:28 2015 -0500
+
+    Asks for categories at the start of each phase
+
+ gameplay.ml | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+commit d82bec194594a1ac98e4f9244c32989a37638baf
+Merge: 2521607 d82a997
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 17:07:25 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit 2521607f462d08ccd5d98acd0c47ef5d10616bf2
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 17:07:22 2015 -0500
+
+    Added fucntions to get difficulty and categories
+
+ gameplay.ml | 26 +++++++++++++++++++++++---
+ 1 file changed, 23 insertions(+), 3 deletions(-)
+
+commit d82a997cc7a2f068e70710a3ca248962352cd47e
+Author: Mike <mhw66@cornell.edu>
+Date:   Wed Dec 2 17:04:46 2015 -0500
+
+    took out a comment
+
+ reader.ml | 2 --
+ 1 file changed, 2 deletions(-)
+
+commit 3807c56974b70e894de7b1b1b354d219b361ee8e
+Author: Mike <mhw66@cornell.edu>
+Date:   Wed Dec 2 17:02:30 2015 -0500
+
+    Category selection
+
+ reader.ml  | 22 +++++++++++-----------
+ reader.mli |  2 +-
+ 2 files changed, 12 insertions(+), 12 deletions(-)
+
+commit 7477f847e53c3225c4ddf21ab97443c9c7485324
+Merge: 5ce4038 e599e48
+Author: Mike <mhw66@cornell.edu>
+Date:   Wed Dec 2 16:57:36 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit 5ce40386abc5c6a0f76d2066b83b5a5522997cbb
+Author: Mike <mhw66@cornell.edu>
+Date:   Wed Dec 2 16:57:30 2015 -0500
+
+    Subject categories added
+
+ reader.ml   | 49 ++++++++++++++++++++++++++++++++++---------------
+ trivia.json | 53 ++++++++++++++++++++++++++++++++++++++++++++++-------
+ 2 files changed, 80 insertions(+), 22 deletions(-)
+
+commit e599e48b6afc13f9d04ed9e3af9434443b051ca0
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Wed Dec 2 16:52:00 2015 -0500
+
+    update bank, bugfix with wallet/wager
+
+ gameplay.ml | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+commit 1b6dd6c018838400cc03ebdf8d9b5bfc6ef91c7f
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 16:33:57 2015 -0500
+
+    Implemented phase two
+
+ gameplay.ml  | 54 +++++++++++++++++++++++++++++++++++++++++++++++++-----
+ gameplay.mli |  7 ++-----
+ 2 files changed, 51 insertions(+), 10 deletions(-)
+
+commit 2de8996547ea349ab698b51b44e4295b28bca773
+Merge: d057e3e 5771a38
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Wed Dec 2 15:24:21 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit d057e3ef840c067b738d798aa72954fa88562b38
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Wed Dec 2 15:24:15 2015 -0500
+
+    gameboard init, update to datatypes
+
+ gameplay.ml  | 53 +++++++++++++++++++++++++++++++++++++++++++++--------
+ gameplay.mli |  4 +++-
+ 2 files changed, 48 insertions(+), 9 deletions(-)
+
+commit 5771a381d8bfa817320e8a99500ac49d263c7b87
+Author: Mike <mhw66@cornell.edu>
+Date:   Wed Dec 2 15:16:13 2015 -0500
+
+    Reader is working
+
+ reader.ml | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+
+commit f204b7263ad8a57d53b061bb3cae8dbbb438b715
+Merge: d559cb4 2e90c37
+Author: Mike <mhw66@cornell.edu>
+Date:   Wed Dec 2 14:50:00 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit d559cb47ce20692a3cb6ec00c12b96de3de77315
+Author: Mike <mhw66@cornell.edu>
+Date:   Wed Dec 2 14:49:46 2015 -0500
+
+    Made random truly random, still broken after first question
+
+ reader.ml | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
+
+commit 2e90c37e32caa8c37ddd2ed2cd272fdf5e0c75b7
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 14:48:19 2015 -0500
+
+    dont need the dictionary file
+
+ words | 234937 ---------------------------------------------------------------
+ 1 file changed, 234937 deletions(-)
+
+commit 2d0d1675a3feb5081319903d4bcd199ff263e6eb
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 14:42:48 2015 -0500
+
+    AI responds with correct answer or a random word
+
+ .ocamlinit  |  4 ++--
+ ai.ml       | 36 ++++++++++++++++++++++++++++++------
+ ai.mli      |  6 ++++--
+ gameplay.ml |  3 ++-
+ 4 files changed, 38 insertions(+), 11 deletions(-)
+
+commit 93a610ff6c457d968db321f2f8adff068c0d13d9
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 02:00:06 2015 -0500
+
+    Fixed gameplay and pInput to correspond to changes in reader, added a dictionary file, changed utop and compilation preferences
+
+ .ocamlinit  |      5 +-
+ ai.ml       |     21 +
+ ai.mli      |      5 +-
+ gameplay.ml |      2 +-
+ main.ml     |      1 +
+ pInput.ml   |     10 +-
+ words       | 234937 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 7 files changed, 234973 insertions(+), 8 deletions(-)
+
+commit f3906b90ecbd5c78db9fc53f0412b57f530f1edf
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Wed Dec 2 01:38:49 2015 -0500
+
+    fixed rand_question call in gameplay
+
+ gameplay.ml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit ff9e7501528c92cad954b5c06f5b78ddfbc050a4
+Merge: c02ed8e feb3fd5
+Author: Mike <mhw66@cornell.edu>
+Date:   Wed Dec 2 01:24:54 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+    
+    Conflicts:
+    	reader.ml
+
+commit c02ed8e111bb8eede5fd5138040d4fe69e1cfc53
+Author: Mike <mhw66@cornell.edu>
+Date:   Wed Dec 2 01:23:31 2015 -0500
+
+    Changed mli and implemented rand_question. Also removed some functions
+
+ reader.ml  | 67 ++++++++++++++++++++++++++++++--------------------------------
+ reader.mli |  8 ++------
+ 2 files changed, 34 insertions(+), 41 deletions(-)
+
+commit feb3fd5815ed7f048278f00aa3c774916bb03a55
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 00:49:39 2015 -0500
+
+    Made phase_one take a unit instead of an int
+
+ gameplay.ml  | 10 +++++-----
+ gameplay.mli |  2 +-
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+commit c1e1cb1203ce374e43194b6f7ef1846742d00ea7
+Merge: 43dd602 5a145dc
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 00:43:16 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit 43dd602d77dd78bf150d6e9ced608cc33b06121d
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 00:43:13 2015 -0500
+
+    Implemented phase one
+
+ gameplay.ml | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+commit 5a145dc6c3d07907e440034719f6bb53d7c5afd6
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Wed Dec 2 00:24:16 2015 -0500
+
+    update wallet ability
+
+ gameplay.ml | 15 ++++++++++-----
+ reader.ml   |  2 +-
+ 2 files changed, 11 insertions(+), 6 deletions(-)
+
+commit 2e68a24081debbc230d76b439ea98aea01499f5b
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 00:13:06 2015 -0500
+
+    Fixed bug in one_word_ans
+
+ pInput.ml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 2f2a386de48a03e6d1adb48b30b274da4ef7dac6
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 00:05:57 2015 -0500
+
+    Changed update_wallet to take an int
+
+ gameplay.mli | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit fe019613cf2832f1babd5af562bffc23bfacb894
+Merge: af00d70 16a9f7a
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 00:04:08 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit af00d7060b70227621b8053009237f2fd17939c2
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Wed Dec 2 00:02:59 2015 -0500
+
+    Removed unecessary functions and implemented update_wallet
+
+ gameplay.ml  | 28 +++++++++++++++-------------
+ gameplay.mli |  6 ------
+ 2 files changed, 15 insertions(+), 19 deletions(-)
+
+commit 16a9f7a68cd0e0c1188062bf7c8c4a1d313e5440
+Merge: 7b650d4 8d54d3f
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Wed Dec 2 00:00:37 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+    
+    Conflicts:
+    	pInput.ml
+
+commit 7b650d4b8a2998a03e5d545d54df6f62f46d5e2e
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Tue Dec 1 23:59:45 2015 -0500
+
+    serve_question in progress
+
+ .ocamlinit   |  3 ++-
+ gameplay.ml  | 29 +++++++++++++++++++----------
+ gameplay.mli |  4 ++--
+ pInput.ml    | 20 ++++++++++----------
+ 4 files changed, 33 insertions(+), 23 deletions(-)
+
+commit 8d54d3f4cd457d9be32ef67d7acc938306e2116a
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Tue Dec 1 23:52:51 2015 -0500
+
+    made sure question answers are lowercase with no punctuation
+
+ pInput.ml | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+commit e51bd9274c3e825ce0d5de1dc1f5eb81cbc64de6
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Tue Dec 1 23:12:04 2015 -0500
+
+    added stubs to gameplay so we can compile
+
+ gameplay.ml | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+
+commit 8087ad6368b98ad116ca2dcfd85ae8bf9432f955
+Merge: aff11fd dce4aa3
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Tue Dec 1 23:04:24 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit aff11fd923d5086aed68358a1c8bed78277f53d7
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Tue Dec 1 23:04:19 2015 -0500
+
+    better ocamlinit, created main for easy compile
+
+ .ocamlinit   | 17 ++++++++++++++++-
+ gameplay.ml  | 38 ++++++++++++++++++++++++++++++++++++++
+ gameplay.mli |  8 ++++----
+ main.ml      |  3 +++
+ pInput.ml    |  2 ++
+ pInput.mli   |  1 -
+ reader.ml    |  6 +++---
+ reader.mli   |  6 +++++-
+ 8 files changed, 71 insertions(+), 10 deletions(-)
+
+commit dce4aa340b8cb6207efc2b11388b84cbbc5ba5cf
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Tue Dec 1 22:02:33 2015 -0500
+
+    quick bug fix
+
+ reader.ml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 634bde012f58867d855b40ebd2ee2a0a1d6f5c34
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Tue Dec 1 22:00:41 2015 -0500
+
+    non random implementation of rand_question
+
+ reader.ml | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+commit 2c8940d2ff921fd73ab7059b7626ffc0d472421c
+Merge: 7a23585 20ed7b3
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Tue Dec 1 21:41:19 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit 7a23585ae0b04ce4ae2eff5c229fe16c5fb05a06
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Tue Dec 1 21:41:15 2015 -0500
+
+    finished is_correct
+
+ pInput.ml  | 15 ++++++++++++++-
+ pInput.mli |  2 ++
+ 2 files changed, 16 insertions(+), 1 deletion(-)
+
+commit 20ed7b3c360d06d9fdc13be8c1cc554c44f72b66
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Tue Dec 1 21:30:19 2015 -0500
+
+    added utop utility for loading modules into utop, added to ocamlinit
+
+ .ocamlinit      | 1 +
+ utop_utility.ml | 5 +++++
+ 2 files changed, 6 insertions(+)
+
+commit f2f54ee43219b6acae4bb609f6ae24d5b0d11a22
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Tue Dec 1 20:59:16 2015 -0500
+
+    updated mli for pInput
+
+ pInput.mli | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 09e300f705d313ace87138ac15b26089b0d3c881
+Merge: 042d63f b0df827
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Tue Dec 1 17:28:48 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit 042d63fa552ec4f4a77315abb179c62ab9fcc2e4
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Tue Dec 1 17:28:06 2015 -0500
+
+    implemented long_ans
+
+ pInput.ml | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+commit b0df82738b99607f9d3884a2ddc35e5a11c49d85
+Merge: d18cd38 2425f0c
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Tue Dec 1 17:27:00 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit d18cd38b1dc4568ea58e8745df834da74cc6d5e9
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Tue Dec 1 17:26:48 2015 -0500
+
+    implemented timed_question
+
+ pInput.ml | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+commit 2425f0c9c73e32f5d2da1893c48649eecbf90eae
+Merge: 8543be1 d60832f
+Author: Mike <mhw66@cornell.edu>
+Date:   Tue Dec 1 17:04:21 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit 8543be14f925cb70c88a4062a6d2eacecef92ac7
+Author: Mike <mhw66@cornell.edu>
+Date:   Tue Dec 1 17:03:48 2015 -0500
+
+    Trivia has 3 difficulty levels, most of reader ready
+
+ reader.ml   | 74 ++++++++++++++++++++++++++++++++++++++++++++++++-------------
+ trivia.json | 58 ++++++++++++++++++++++++++++++++++++++++++++++--
+ 2 files changed, 114 insertions(+), 18 deletions(-)
+
+commit d60832fb4adcf1fbc162c5f08a12371b1354e81d
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Tue Dec 1 17:02:59 2015 -0500
+
+    changed signature for timed_question
+
+ pInput.mli | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 5fc8a6dcbc7647f50f7abbce78f07be3681753c7
+Merge: 6001da2 78c45ed
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Tue Dec 1 16:11:55 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit 6001da2d07d6463e16793bbb6c6f1caeb204147c
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Tue Dec 1 16:10:52 2015 -0500
+
+    implemented get_input and one_word_ans
+
+ pInput.ml | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+commit 78c45ed4fa5ebf9b831bbc1c919a86992fc00051
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Tue Dec 1 16:10:17 2015 -0500
+
+    implemented strip
+
+ pInput.ml | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+commit 7613fe0c5cc5defa5156567213e05d4a3ddf4915
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Tue Dec 1 15:33:18 2015 -0500
+
+    Empty pInput
+
+ pInput.ml | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit e732e9d9ce2403562800901d5a4bab7e29c0fd08
+Author: Mike <mhw66@cornell.edu>
+Date:   Tue Dec 1 15:28:54 2015 -0500
+
+    Starter implementing reader and created easy set of trivia questions in json format
+
+ reader.ml   | 43 +++++++++++++++++++++++++++++++++++++++++++
+ trivia.json | 32 ++++++++++++++++++++++++++++++++
+ 2 files changed, 75 insertions(+)
+
+commit 5e9766df255458b6d570ab35e54a304e51e793a3
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Thu Nov 12 17:31:28 2015 -0500
+
+    Finished mlis
+
+ gui.mli    | 11 ++++++++++-
+ pInput.mli | 26 +++++++++++++++++++++++++-
+ 2 files changed, 35 insertions(+), 2 deletions(-)
+
+commit debc4a3209bdd8debba7354460c04e4afa4505ac
+Merge: 17ab3be ee6d4ed
+Author: Mike <mhw66@cornell.edu>
+Date:   Thu Nov 12 17:15:54 2015 -0500
+
+    Merge branch 'master' of https://github.com/domrettig/The-Chase
+
+commit ee6d4ed1ffb850b066dad0265e379af788e31fa0
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Thu Nov 12 17:19:56 2015 -0500
+
+    gameplay, reader mli v1.0
+
+ gameplay.mli | 60 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ reader.mli   | 18 +++++++++++++++++-
+ 2 files changed, 76 insertions(+), 2 deletions(-)
+
+commit 17ab3be3ac5f4f98610b437c111bdb1cb30b79ec
+Author: Mike <mhw66@cornell.edu>
+Date:   Thu Nov 12 17:15:19 2015 -0500
+
+    mli for ai and convert
+
+ ai.mli      | 9 ++++++++-
+ convert.mli | 9 ++++++++-
+ 2 files changed, 16 insertions(+), 2 deletions(-)
+
+commit 12b04ec8f99775cf908a0b29956120c300f4496d
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Wed Nov 11 16:36:20 2015 -0500
+
+    Marking mli responsibilities
+
+ ai.mli       | 1 +
+ convert.mli  | 1 +
+ gameplay.mli | 1 +
+ gui.mli      | 1 +
+ pInput.mli   | 1 +
+ reader.mli   | 1 +
+ 6 files changed, 6 insertions(+)
+
+commit c4652a8531bd85c42c6075c5899e6bc4af355816
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Wed Nov 11 16:26:49 2015 -0500
+
+    Init mli files
+
+ ai.mli       | 0
+ convert.mli  | 0
+ gameplay.mli | 0
+ gui.mli      | 0
+ pInput.mli   | 0
+ reader.mli   | 0
+ 6 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 69d564b57e43743c0123a3e6f409096ab9300e23
+Author: Joe Mileo <joemileo@gmail.com>
+Date:   Thu Nov 5 12:43:49 2015 -0500
+
+    Better readme
+
+ README.md | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 6529e0fa80f60ce081221a308d9dcd4c8ff32e2b
+Author: Dom Rettig <djohnrettig@gmail.com>
+Date:   Thu Nov 5 12:35:22 2015 -0500
+
+    first commit
+
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)

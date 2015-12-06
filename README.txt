@@ -1,8 +1,12 @@
+MUST BE RUN ON THE CS3110 VM
+	-The game relies on a dictionary that is available on the 3110 VM
 opam install lambda-term
 cs3110 compile gui.ml -t -p yojson,str,lambda-term
 cs3110 run gui.ml
 
 Lambda-term needs to be installed prior to compiling and running. Instructions for the game are below:
+
+
 
 Navigation of the game:
 Pressing Esc at any point in the game will exit the game.
