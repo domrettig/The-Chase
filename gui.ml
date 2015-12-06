@@ -3,7 +3,20 @@ open Lwt_react
 open Lwt
 open LTerm_widget
 
-let time = ref 11
+(**
+* Each round has a pre-screen and a main screen. The general structure
+* of each function is the creation of the gui elements, with their 
+* initial text. The update functions handle changing the text to
+* display questions and timer. The Escape key is bound to exit the 
+* game at any stage. Any key presses that are characters are passed
+* through and displayed in the answer label. Each screen has an 
+* event handler function that handles the keypresses. Inspiration
+* for these functions was found in the examples on the Lambda-Term 
+* GitHub. 
+*)
+
+
+let time = ref 91
 let answer_ref = ref ""
 
 let get_time () =
@@ -15,7 +28,7 @@ let get_time () =
 let round_three () =
   let waiter, wakener = wait () in
 
-  let r3_time = ref 11 in
+  let r3_time = ref 121 in
 
   let ai_round = ref false in
 
