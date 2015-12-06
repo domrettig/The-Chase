@@ -1,13 +1,4 @@
-
-(* For a timed question, timed_question receives an empty Ivar from Gameplay
- * After x seconds, Ivar will be filled, and the player will not be allowed
- * to enter an answer. *)
-val timed_question : float -> string
-
 val timeout : bool ref
-
-(* Returns player input for answer to a trivia question *)
-val get_input : unit -> string
 
 (* Removes all punctuation and capitalization from player's input *)
 val strip : string -> string

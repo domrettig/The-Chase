@@ -8,6 +8,7 @@ type dictionary = string list
 let seed () =
 	Random.self_init();;
 
+(* Generate a list of words from the OS dictionary file (only works on 3110 VM) *)
 let gen_dict () : dictionary =
 	(* FROM: http://camltastic.blogspot.com/2008/09/tip-read-all-lines-from-file-most.html *)
 	let lines = ref [] in
@@ -28,9 +29,9 @@ let difficulty (i:int) : probability =
 	if i = 0 then
 		[0.4;0.6]
 	else if i = 1 then
-		[0.6;0.8]
+		[0.5;0.7]
 	else
-		[0.8;1.0]
+		[0.6;0.8]
 
 let ai_is_correct i =
 	seed ();

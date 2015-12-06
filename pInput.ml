@@ -7,23 +7,9 @@ let explode = Str.split (Str.regexp " ")
 let strip (ans:string) : string =
   let exp_lower = explode (String.trim (String.lowercase ans)) in
   let clean a x = if x<>"" then a ^ (x ^ " ") else a in
-    String.trim (List.fold_left clean "" (List.map remove_non_alpha exp_lower))
-
-let get_input () = 
-	Printf.printf "Answer: ";
-	strip (read_line())
+	String.trim (List.fold_left clean "" (List.map remove_non_alpha exp_lower))
 
 let timeout = ref false
-
-let timed_question (time:float) : string =
-  let start_time = Unix.gettimeofday () in 
-  let input = get_input () in
-  let end_time = Unix.gettimeofday () in
-  if (end_time-.start_time) > time then begin
-    timeout := true;
-    ""
-  end
-  else input
 
 let one_word_ans q a =
 	let rec helper question ans =
@@ -34,7 +20,7 @@ let one_word_ans q a =
 	    	true
 	    else
 		    helper question tl) in
-	helper q (Str.split (Str.regexp " ") a)
+	helper q (explode a)
 
 (* long_ans ensures that all words in the correct answer are in the player's answer
  * i.e., the correct answer is a subset of the player's answer *)

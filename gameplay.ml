@@ -58,16 +58,11 @@ let metadata = {
 	curr_question = {question="";answer="";point=0}
 }
 
-(*##############################################################*)
-
 let send_question () =
 	let q = Reader.rand_question metadata.difficulty metadata.curr_cat in
 	metadata.curr_question <- q;
 	q.question
 
-
-
-(*##############################################################*)
 let categories = [(0, "Science");(1, "History");(2, "Music");(3, "Geography")]
 
 let display_question (q:Reader.question) : unit =
@@ -87,6 +82,7 @@ let update_wallet n =
 	metadata.player.wallet <- new_val
 
 let receive_answer a =
+	(* Input will always be of form 'Answer:xxxxxx', so take substring after colon *)
 	let ans = String.sub a 7 ((String.length a) - 7) in
 	let (correct, timeout) = PInput.is_correct ans metadata.curr_question in
 	(if correct && not timeout then begin
@@ -96,18 +92,18 @@ let receive_answer a =
   else ());
 	(respond_to_answer(correct,timeout),string_of_float(metadata.player.wallet))
 
-let serve_question () =
+(* let serve_question () =
   let q = Reader.rand_question metadata.difficulty metadata.curr_cat in
   display_question q;
   let ans = PInput.get_input () in
   let (correct, timeout) = PInput.is_correct ans q in
-  (* respond_to_answer (correct, timeout); *)
+  respond_to_answer (correct, timeout);
   (if correct && not timeout then begin
   	metadata.player.num_right <- metadata.player.num_right + 1;
     update_wallet (float_of_int q.point)
   end
   else ());
-  Printf.printf "Your Wallet: %f\n" metadata.player.wallet
+  Printf.printf "Your Wallet: %f\n" metadata.player.wallet *)
 
 let send_wallet () =
 	"$" ^ (string_of_float metadata.player.wallet)
@@ -122,13 +118,13 @@ let rec receive_diff diff =
 	| "hard" 		-> metadata.difficulty <- 2; true
 	| _ 				-> false
 
-let rec get_available_cat (left: (int * bytes) list) =
+(* let rec get_available_cat (left: (int * bytes) list) =
 	match left with
 	| [] -> ""
 	| h::t -> (match h with
 				| (id, name) -> if not (List.mem id metadata.used_cat) then
 								  name ^ "\n" ^ (get_available_cat t)
-								else (get_available_cat t))
+								else (get_available_cat t)) *)
 
 let rec receive_cat cat =
 	match (String.lowercase cat) with
@@ -170,7 +166,7 @@ let rec receive_cat cat =
     end
 	| _ 				-> false
 
-let phase_one () =
+(* let phase_one () =
 	(* get_difficulty ();
 	get_category (); *)
 	let start_time = Unix.gettimeofday () in
@@ -182,7 +178,7 @@ let phase_one () =
 		end
 		else
 			Printf.printf "Time's up!\n" in
-	body ()
+	body () *)
 
 let update_bank n =
 	let new_val = metadata.player.bank +. n in
@@ -200,6 +196,7 @@ let caught () =
 	metadata.gameboard.player_pos = metadata.gameboard.chaser_pos
 
 let at_bank () =
+	(* subtract 1 from gameboard size, positions are 0 indexed *)
 	metadata.gameboard.player_pos = (metadata.gameboard.size - 1)
 
 (* let rec init_gameboard () =
@@ -244,7 +241,7 @@ let receive_board ans =
     true
   |  _  -> false
 
-let rec head_to_head_question () =
+(* let rec head_to_head_question () =
 	(* Get question, display, and update metadata *)
 	let q = Reader.rand_question metadata.difficulty metadata.curr_cat in
 	display_question q;
@@ -275,7 +272,7 @@ and finished () =
 		metadata.player.wager <- 0.
 	end
 	else
-		head_to_head_question ()
+		head_to_head_question () *)
 
 let receive_positions () = 
 	"Player at position " ^ (string_of_int metadata.gameboard.player_pos) ^ "\n" ^
@@ -284,13 +281,16 @@ let receive_positions () =
 
 let phase_two_end win =
 	if win then begin
+		(* add player's wager to their bank if they win *)
 		update_bank metadata.player.wager;
 		let response = "You successfully banked $" ^ string_of_float(metadata.player.wager) in
 		response
 	end
 	else begin
+		(* remove player's wager from bank in they lose *)
 		metadata.player.wallet <- (metadata.player.wallet -. metadata.player.wager);
 		metadata.player.wager <- 0.;
+		(* if they ran out of money, the game is over *)
 		if metadata.player.wallet = 0. then
 			"You're out of money! Game over."
 		else
@@ -305,7 +305,7 @@ let receive_head_to_head s =
 	update_gameboard player_correct ai_correct;
 	(response, new_bank, ai_correct, ai_ans)
 
-let phase_two () =
+(* let phase_two () =
 	(* init_gameboard (); *)
 	(* get_category (); *)
 	Printf.printf "These are timed questions. You have 10 seconds to answer.\n";
@@ -313,9 +313,11 @@ let phase_two () =
 	if metadata.player.wallet = 0. then
 		Printf.printf "You're out of money! Game over\n"
 	else
-		Printf.printf "On to Phase Three!\n"
+		Printf.printf "On to Phase Three!\n" *)
 
+(* Generate a bool list *)
 let ai_answer_questions () =
+	(* the AI 'sees' a random number of quetsions *)
 	let num_seen = 90 / ((Random.int 6) + 5) in
 	let rec create_list l i =
 		if i = 0 then []
@@ -325,7 +327,7 @@ let ai_answer_questions () =
 let send_ai_list () = 
 	ai_answer_questions ()
 
-let rec show_answers count = function
+(* let rec show_answers count = function
 	| []        -> ()
 	| true::tl  -> Printf.printf "The Chaser answered a question correctly.\n";
 								 count := !count + 1;
@@ -338,9 +340,9 @@ let rec show_answers count = function
 							   (* respond_to_answer (correct, timeout); *)
 							   (if correct then metadata.player.num_right <- metadata.player.num_right + 1
 							 	 else ());
-								 show_answers count tl
+								 show_answers count tl *)
 
-let phase_three () =
+(* let phase_three () =
 	metadata.player.num_right <- 0;
 	phase_one ();
 	Printf.printf "%d\n" metadata.player.num_right;
@@ -349,11 +351,11 @@ let phase_three () =
 	if metadata.player.num_right > !counter then
 	  Printf.printf "YOU WIN MOTHERFUCKER\n"
 	else
-		Printf.printf "YOU LOSE MOTHERFUCKER\n"
+		Printf.printf "YOU LOSE MOTHERFUCKER\n" *)
 
-let game_loop () =
+(* let game_loop () =
 	Printf.printf "Welcome to The Chase!\n";
 	Printf.printf "For this phase, answer as many questions as you can in 90 seconds.\n";
 	phase_one ();
 	phase_two ();
-	phase_three ()
+	phase_three () *)
